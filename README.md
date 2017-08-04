@@ -6,5 +6,5 @@ SpotiAlarm is An alarm clock that launches Spotify.exe and plays the last song s
 
 Current Version 1.0
 
-How to isntall
+How to install
 Download the SpotiAlarm.Exe in bin. From there run it and create an alarm.
