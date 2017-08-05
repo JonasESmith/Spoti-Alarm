@@ -8,3 +8,8 @@ Current Version 1.0
 
 How to install
 Download the SpotiAlarm.Exe in bin. From there run it and create an alarm.
+
+#Want to add
+Support for multiple alarms.
+Support for other media players.
+Choice of playlist when started. 
