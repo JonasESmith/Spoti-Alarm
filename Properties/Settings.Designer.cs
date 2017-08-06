@@ -70,5 +70,17 @@ namespace DigiClockwithAlarm.Properties {
                 this["UserDays"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UserStartup {
+            get {
+                return ((bool)(this["UserStartup"]));
+            }
+            set {
+                this["UserStartup"] = value;
+            }
+        }
     }
 }

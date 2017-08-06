@@ -17,8 +17,14 @@ namespace DigiClockwithAlarm
         public SetAlarm()
         {
             InitializeComponent();
+        }
 
+
+        private void Alarm_Load(object sender, EventArgs e)
+        {
             #region Loading styles to all assets
+            // Showing Icon
+            ShowIcon = false;
 
             // loads "dark" style to match spotify 
             this.StyleManager = msmMain;
@@ -41,53 +47,21 @@ namespace DigiClockwithAlarm
             button1.MouseEnter += OnMouseEnterSave;
             button1.MouseLeave += OnMouseLeaveSave;
 
-            // spotiPathBtn
-            spotiPathBtn.ForeColor = Color.Gray;
-            spotiPathBtn.TabStop = false;
-            spotiPathBtn.FlatStyle = FlatStyle.Flat;
-            spotiPathBtn.FlatAppearance.BorderSize = 0;
-            spotiPathBtn.FlatAppearance.BorderColor = Color.FromArgb(0, 255, 255, 255);
-            // adds the green hoover effect to the buttons
-            spotiPathBtn.MouseEnter += OnMouseEnterPath;
-            spotiPathBtn.MouseLeave += OnMouseLeavePath;
-
             // changeing the number of items shown on comboxes
             HourComBox.DropDownHeight = HourComBox.Font.Height * 5;
             minComBox.DropDownHeight = HourComBox.Font.Height * 10;
             #endregion
-        }
 
-
-        private void Alarm_Load(object sender, EventArgs e)
-        {
             int hours = Convert.ToInt32(DateTime.Now.ToString("HH"));
             HourComBox.Text = hours.ToString("D2");
             int minutes = Convert.ToInt32(DateTime.Now.ToString("mm")); minutes++;
-            if (minutes == 59)
+            if (minutes == 00)
                 minComBox.Text = "00";
             else
                 minComBox.Text = minutes.ToString("D2");
         }
 
-        #region "Blank" methods 
-
-
-        private void fridayBox_CheckedChanged(object sender, EventArgs e)
-        { }
-        private void HourComBox_SelectedIndexChanged(object sender, EventArgs e)
-        { }
-        private void metroComboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        { }
-        private void label1_Click(object sender, EventArgs e)
-        { }
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
-        { }
-        private void numericUpDown2_ValueChanged(object sender, EventArgs e)
-        { }
-
-        #endregion
-
-        #region Button code
+        #region Save-Button code
 
         // Save button 
 
@@ -147,10 +121,8 @@ namespace DigiClockwithAlarm
                     reCheck += 9;
 
                     #endregion
-
             } else {
                 string day = DateTime.Now.DayOfWeek.ToString();
-
                 #region switch select day 
 
                 switch (day)
@@ -181,31 +153,7 @@ namespace DigiClockwithAlarm
             }
             Properties.Settings.Default.UserDays = reCheck;
             Properties.Settings.Default.Save();
-
         }
-
-        private void spotiPathBtn_Click(object sender, EventArgs e)
-        {
-            // initialize path string
-            string path = "";
-
-            // create openfiledialog for the button press
-            OpenFileDialog openExe = new OpenFileDialog();
-
-            // this is finding the "usual" path for spotify however it may not always work
-            string userName = Environment.UserName;
-            path = "C:\\Users\\" + userName + "\\AppData\\Roaming\\Spotify";
-
-            // open file dialog at the spotify location
-            openExe.InitialDirectory = path;
-            if (openExe.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                // sets the new path to execute.
-                String filePath = openExe.FileName;
-                Properties.Settings.Default.UserPath = filePath;
-            }
-        }
-
         // on mouse hoover
         private void OnMouseEnterSave(object sender, EventArgs e)
         {
@@ -214,14 +162,6 @@ namespace DigiClockwithAlarm
         private void OnMouseLeaveSave(object sender, EventArgs e)
         {
             button1.BackColor = Color.FromArgb(0, 255, 255, 255);
-        }
-        private void OnMouseEnterPath(object sender, EventArgs e)
-        {
-            spotiPathBtn.BackColor = Color.LightGreen;
-        }
-        private void OnMouseLeavePath(object sender, EventArgs e)
-        {
-            spotiPathBtn.BackColor = Color.FromArgb(0, 255, 255, 255);
         }
         #endregion
 
@@ -235,16 +175,34 @@ namespace DigiClockwithAlarm
                 this.Height = 220;
                 repeat = 1;
                 dayComBox.Enabled = false;
-                dayLabel.Enabled = false;
+                dayLabel.ForeColor = Color.Gray;
             }
             else if (!repeatingAlarm.Checked)
             {
                 this.Size = new Size(375, 150);
                 repeat = 0;
                 dayComBox.Enabled = true;
-                dayLabel.Enabled = true;
+                dayLabel.ForeColor = Color.White;
             }
         }
+
+        #endregion
+
+        #region "Blank" methods 
+
+
+        private void fridayBox_CheckedChanged(object sender, EventArgs e)
+        { }
+        private void HourComBox_SelectedIndexChanged(object sender, EventArgs e)
+        { }
+        private void metroComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        { }
+        private void label1_Click(object sender, EventArgs e)
+        { }
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        { }
+        private void numericUpDown2_ValueChanged(object sender, EventArgs e)
+        { }
 
         #endregion
 

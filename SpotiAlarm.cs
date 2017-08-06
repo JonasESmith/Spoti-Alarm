@@ -1,6 +1,7 @@
 ﻿// Programmer :  Jonas Smith
 // program    :  SpotiAlarm
 // Purpose    :  Start spotify to play the last playlist at a specific time. 
+// Set startup:  https://stackoverflow.com/questions/674628/how-do-i-set-a-program-to-launch-at-startup
 
 using System;
 using System.Drawing;
@@ -10,9 +11,13 @@ using System.IO;
 using System.Linq;
 
 namespace DigiClockwithAlarm
-{   public partial class SpotiAlarm : MetroFramework.Forms.MetroForm
+{
+    public partial class SpotiAlarm : MetroFramework.Forms.MetroForm
     {   // hour12 = army/regular  alarm = 0/1
         private int hour12 = 0, alarm = 0;
+
+        public string paths;
+        public string fileName;
 
         // path to Spotify.exe
         private string path;
@@ -21,16 +26,16 @@ namespace DigiClockwithAlarm
         public SpotiAlarm()
         {
             InitializeComponent();
-            StyleManager = msmMain;
             ShowIcon = false;
 
             // loads correct theme from MetroFramework.
+            StyleManager = msmMain;
             msmMain.Theme = MetroFramework.MetroThemeStyle.Dark;
             msmMain.Style = MetroFramework.MetroColorStyle.Green;
 
             // changes text colors for the dark theme above. 
             label1.ForeColor = Color.White;
-            button2.ForeColor = Color.White; 
+            button2.ForeColor = Color.White;
 
             #region loadbutton styles 
 
@@ -42,8 +47,36 @@ namespace DigiClockwithAlarm
             button2.MouseEnter += OnMouseEnter;
             button2.MouseLeave += OnMouseLeave;
 
+            settingsBtn.TabStop = false;
+            settingsBtn.FlatStyle = FlatStyle.Flat;
+            settingsBtn.FlatAppearance.BorderSize = 0;
+            settingsBtn.FlatAppearance.BorderColor = Color.FromArgb(0, 255, 255, 255);
             #endregion
         }
+
+
+        #region Onstartup failure
+
+        public void GetExeLocation()
+        {
+            // for getting the location of exe file ( it can change when you change the location of exe)
+            paths = System.Reflection.Assembly.GetEntryAssembly().Location;
+
+            // for getting the name of exe file( it can change when you change the name of exe)
+            fileName = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
+
+            // start the exe autometically when computer is stared.
+            StartExeWhenPcStartup(fileName, paths);
+        }
+
+        public void StartExeWhenPcStartup(string filename, string filepaths)
+        {
+            Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+            key.SetValue(filename, filepaths);
+        }
+        #endregion
+
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -63,13 +96,16 @@ namespace DigiClockwithAlarm
 
             // tool tip for add alarm button/label that shows when the next alarm is. 
             // this is gross but is better than its own label.
-            string tooltip = " "; 
+            string tooltip = " ";
             if ((getUp.hh == 0) && (getUp.mm == 0))
             {
                 tooltip = "There is currently no alarm.";
-            } else {
+            }
+            else
+            {
                 tooltip = "Next alarm at " + Properties.Settings.Default.UserHour.ToString("D2") + ":"
-                                           + Properties.Settings.Default.UserMinute.ToString("D2");   }
+                                           + Properties.Settings.Default.UserMinute.ToString("D2");
+            }
             this.toolTip1.SetToolTip(this.button2, tooltip);
             this.toolTip1.SetToolTip(this.label1, tooltip);
         }
@@ -138,9 +174,8 @@ namespace DigiClockwithAlarm
                     Convert.ToInt32(DateTime.Now.ToString("ss")) == getUp.ss)
                 {
                     ProcessStartInfo start = new ProcessStartInfo();
-
-
                     var proc = Process.GetProcessesByName("Spotify").FirstOrDefault();
+                    path = Properties.Settings.Default.UserPath;
                     start.FileName = path;
                     if (proc == null)
                     {
@@ -237,8 +272,10 @@ namespace DigiClockwithAlarm
         { }
 
         private void label1_Click(object sender, EventArgs e)
-        {   if (hour12 == 0) hour12 = 1;
-            else             hour12 = 0;   }
+        {
+            if (hour12 == 0) hour12 = 1;
+            else hour12 = 0;
+        }
 
         private void label3_Click(object sender, EventArgs e)
         { }
@@ -251,6 +288,16 @@ namespace DigiClockwithAlarm
 
         private void toolTip1_Popup(object sender, PopupEventArgs e)
         { }
+
+        private void settingsBtn_Click(object sender, EventArgs e)
+        {
+
+            settings settingsPage = new settings();
+            settingsPage.Show();
+            this.Hide();
+
+
+        }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         { Application.Exit(); }

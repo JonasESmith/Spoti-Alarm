@@ -29,11 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SpotiAlarm));
             this.label1 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.button2 = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.msmMain = new MetroFramework.Components.MetroStyleManager(this.components);
+            this.settingsBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.msmMain)).BeginInit();
             this.SuspendLayout();
             // 
@@ -76,11 +78,22 @@
             this.msmMain.Style = MetroFramework.MetroColorStyle.Green;
             this.msmMain.Theme = MetroFramework.MetroThemeStyle.Dark;
             // 
+            // settingsBtn
+            // 
+            this.settingsBtn.Image = ((System.Drawing.Image)(resources.GetObject("settingsBtn.Image")));
+            this.settingsBtn.Location = new System.Drawing.Point(0, 113);
+            this.settingsBtn.Name = "settingsBtn";
+            this.settingsBtn.Size = new System.Drawing.Size(40, 40);
+            this.settingsBtn.TabIndex = 3;
+            this.settingsBtn.UseVisualStyleBackColor = true;
+            this.settingsBtn.Click += new System.EventHandler(this.settingsBtn_Click);
+            // 
             // SpotiAlarm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(450, 150);
+            this.Controls.Add(this.settingsBtn);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label1);
             this.MaximizeBox = false;
@@ -101,6 +114,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ToolTip toolTip1;
         private MetroFramework.Components.MetroStyleManager msmMain;
+        private System.Windows.Forms.Button settingsBtn;
     }
 }
 

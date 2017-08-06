@@ -47,7 +47,6 @@
             this.thursdayBox = new MetroFramework.Controls.MetroCheckBox();
             this.dayComBox = new MetroFramework.Controls.MetroComboBox();
             this.dayLabel = new System.Windows.Forms.Label();
-            this.spotiPathBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.msmMain)).BeginInit();
             this.SuspendLayout();
             // 
@@ -318,23 +317,12 @@
             this.dayLabel.TabIndex = 19;
             this.dayLabel.Text = "day";
             // 
-            // spotiPathBtn
-            // 
-            this.spotiPathBtn.Location = new System.Drawing.Point(15, 186);
-            this.spotiPathBtn.Name = "spotiPathBtn";
-            this.spotiPathBtn.Size = new System.Drawing.Size(111, 23);
-            this.spotiPathBtn.TabIndex = 20;
-            this.spotiPathBtn.Text = "change spotify path";
-            this.spotiPathBtn.UseVisualStyleBackColor = true;
-            this.spotiPathBtn.Click += new System.EventHandler(this.spotiPathBtn_Click);
-            // 
             // SetAlarm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(450, 150);
             this.ControlBox = false;
-            this.Controls.Add(this.spotiPathBtn);
             this.Controls.Add(this.dayLabel);
             this.Controls.Add(this.dayComBox);
             this.Controls.Add(this.saturdayBox);
@@ -384,6 +372,5 @@
         private MetroFramework.Controls.MetroCheckBox sundayBox;
         private System.Windows.Forms.Label dayLabel;
         private MetroFramework.Controls.MetroComboBox dayComBox;
-        private System.Windows.Forms.Button spotiPathBtn;
     }
 }

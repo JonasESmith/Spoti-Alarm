@@ -47,6 +47,9 @@ E:\SpotiAlarm.V2\obj\x86\Debug\DigiClockwithAlarm.Properties.Resources.resources
 E:\SpotiAlarm.V2\obj\x86\Debug\SpotiAlarm.csproj.GenerateResource.Cache
 E:\SpotiAlarm.V2\obj\x86\Debug\SpotiAlarm.exe
 E:\SpotiAlarm.V2\obj\x86\Debug\SpotiAlarm.pdb
+D:\Spoti-Alarm\SpotiAlarm.V2\bin\Debug\SpotiAlarm.exe.config
+D:\Spoti-Alarm\SpotiAlarm.V2\obj\x86\Debug\SpotiAlarm.exe
+D:\Spoti-Alarm\SpotiAlarm.V2\obj\x86\Debug\SpotiAlarm.pdb
 E:\Spoti-Alarm\SpotiAlarm.V2\bin\Debug\SpotiAlarm.exe.config
 E:\Spoti-Alarm\SpotiAlarm.V2\bin\Debug\SpotiAlarm.exe
 E:\Spoti-Alarm\SpotiAlarm.V2\bin\Debug\SpotiAlarm.pdb
@@ -57,4 +60,4 @@ E:\Spoti-Alarm\SpotiAlarm.V2\obj\x86\Debug\DigiClockwithAlarm.Properties.Resourc
 E:\Spoti-Alarm\SpotiAlarm.V2\obj\x86\Debug\SpotiAlarm.csproj.GenerateResource.Cache
 E:\Spoti-Alarm\SpotiAlarm.V2\obj\x86\Debug\SpotiAlarm.exe
 E:\Spoti-Alarm\SpotiAlarm.V2\obj\x86\Debug\SpotiAlarm.pdb
-E:\Spoti-Alarm\SpotiAlarm.V2\bin\Debug\MetroFramework.dll
+E:\Spoti-Alarm\SpotiAlarm.V2\obj\x86\Debug\DigiClockwithAlarm.settings.resources
