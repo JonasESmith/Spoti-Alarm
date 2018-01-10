@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Microsoft.Win32;
 
-namespace DigiClockwithAlarm
+namespace SpotiAlarm
 {
     public partial class settings : MetroFramework.Forms.MetroForm
     {

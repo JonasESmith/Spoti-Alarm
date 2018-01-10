@@ -10,11 +10,11 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 
-namespace DigiClockwithAlarm
+namespace SpotiAlarm
 {
     public partial class SpotiAlarm : MetroFramework.Forms.MetroForm
     {   // hour12 = army/regular  alarm = 0/1
-        private int hour12 = 0, alarm = 0;
+        private int hour12 = 0,   alarm = 0;
 
         public string paths;
         public string fileName;
@@ -75,8 +75,6 @@ namespace DigiClockwithAlarm
             key.SetValue(filename, filepaths);
         }
         #endregion
-
-
 
         private void Form1_Load(object sender, EventArgs e)
         {

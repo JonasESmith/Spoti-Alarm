@@ -8,7 +8,7 @@
     <ProjectGuid>{6562C985-E70E-4973-87CA-4946168818E8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DigiClockwithAlarm</RootNamespace>
+    <RootNamespace>SpotiAlarm</RootNamespace>
     <AssemblyName>SpotiAlarm</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>

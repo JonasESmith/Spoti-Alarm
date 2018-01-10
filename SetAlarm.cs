@@ -5,20 +5,19 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace DigiClockwithAlarm
+namespace SpotiAlarm
 {
     public partial class SetAlarm : MetroFramework.Forms.MetroForm
     {
-        public int hh;
-        public int mm;
-        public int ss;
-        public int repeat;
+        public int    hh;
+        public int    mm;
+        public int    ss;
+        public int    repeat;
         public string reCheck;
         public SetAlarm()
         {
             InitializeComponent();
         }
-
 
         private void Alarm_Load(object sender, EventArgs e)
         {
