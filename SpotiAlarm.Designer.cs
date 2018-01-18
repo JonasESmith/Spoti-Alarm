@@ -32,7 +32,7 @@
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SpotiAlarm));
       this.label1 = new System.Windows.Forms.Label();
       this.timer1 = new System.Windows.Forms.Timer(this.components);
-      this.button2 = new System.Windows.Forms.Button();
+      this.addAlarmBtn = new System.Windows.Forms.Button();
       this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
       this.msmMain = new MetroFramework.Components.MetroStyleManager(this.components);
       this.settingsBtn = new System.Windows.Forms.Button();
@@ -56,17 +56,17 @@
       this.timer1.Interval = 1000;
       this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
       // 
-      // button2
+      // addAlarmBtn
       // 
-      this.button2.BackColor = System.Drawing.Color.Transparent;
-      this.button2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.button2.Location = new System.Drawing.Point(360, 42);
-      this.button2.Name = "button2";
-      this.button2.Size = new System.Drawing.Size(70, 70);
-      this.button2.TabIndex = 2;
-      this.button2.Text = "add alarm";
-      this.button2.UseVisualStyleBackColor = false;
-      this.button2.Click += new System.EventHandler(this.button2_Click);
+      this.addAlarmBtn.BackColor = System.Drawing.Color.Transparent;
+      this.addAlarmBtn.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.addAlarmBtn.Location = new System.Drawing.Point(360, 42);
+      this.addAlarmBtn.Name = "addAlarmBtn";
+      this.addAlarmBtn.Size = new System.Drawing.Size(70, 70);
+      this.addAlarmBtn.TabIndex = 2;
+      this.addAlarmBtn.Text = "add alarm";
+      this.addAlarmBtn.UseVisualStyleBackColor = false;
+      this.addAlarmBtn.Click += new System.EventHandler(this.button2_Click);
       // 
       // toolTip1
       // 
@@ -94,7 +94,7 @@
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(450, 150);
       this.Controls.Add(this.settingsBtn);
-      this.Controls.Add(this.button2);
+      this.Controls.Add(this.addAlarmBtn);
       this.Controls.Add(this.label1);
       this.MaximizeBox = false;
       this.MaximumSize = new System.Drawing.Size(450, 150);
@@ -111,7 +111,7 @@
 
     private System.Windows.Forms.Label label1;
     private System.Windows.Forms.Timer timer1;
-    private System.Windows.Forms.Button button2;
+    private System.Windows.Forms.Button addAlarmBtn;
     private System.Windows.Forms.ToolTip toolTip1;
     private MetroFramework.Components.MetroStyleManager msmMain;
     private System.Windows.Forms.Button settingsBtn;

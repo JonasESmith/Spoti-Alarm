@@ -1,6 +1,6 @@
 ﻿namespace SpotiAlarm
 {
-  partial class settings
+  partial class Settings
   {
     /// <summary>
     /// Required designer variable.

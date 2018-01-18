@@ -48,6 +48,7 @@
       this.dayComBox = new MetroFramework.Controls.MetroComboBox();
       this.dayLabel = new System.Windows.Forms.Label();
       this.bgWorker = new System.ComponentModel.BackgroundWorker();
+      this.nameTxtBx = new System.Windows.Forms.TextBox();
       ((System.ComponentModel.ISupportInitialize)(this.msmMain)).BeginInit();
       this.SuspendLayout();
       // 
@@ -99,7 +100,7 @@
       // repeatingAlarm
       // 
       this.repeatingAlarm.AutoSize = true;
-      this.repeatingAlarm.Location = new System.Drawing.Point(23, 125);
+      this.repeatingAlarm.Location = new System.Drawing.Point(23, 155);
       this.repeatingAlarm.Name = "repeatingAlarm";
       this.repeatingAlarm.Size = new System.Drawing.Size(144, 15);
       this.repeatingAlarm.TabIndex = 3;
@@ -112,7 +113,6 @@
       this.minComBox.FormattingEnabled = true;
       this.minComBox.ItemHeight = 23;
       this.minComBox.Items.AddRange(new object[] {
-            "00",
             "01",
             "02",
             "03",
@@ -222,7 +222,7 @@
       // sundayBox
       // 
       this.sundayBox.AutoSize = true;
-      this.sundayBox.Location = new System.Drawing.Point(50, 165);
+      this.sundayBox.Location = new System.Drawing.Point(50, 195);
       this.sundayBox.Name = "sundayBox";
       this.sundayBox.Size = new System.Drawing.Size(46, 15);
       this.sundayBox.TabIndex = 11;
@@ -232,7 +232,7 @@
       // mondayBox
       // 
       this.mondayBox.AutoSize = true;
-      this.mondayBox.Location = new System.Drawing.Point(100, 165);
+      this.mondayBox.Location = new System.Drawing.Point(100, 195);
       this.mondayBox.Name = "mondayBox";
       this.mondayBox.Size = new System.Drawing.Size(51, 15);
       this.mondayBox.TabIndex = 12;
@@ -242,7 +242,7 @@
       // tuesdayBox
       // 
       this.tuesdayBox.AutoSize = true;
-      this.tuesdayBox.Location = new System.Drawing.Point(150, 165);
+      this.tuesdayBox.Location = new System.Drawing.Point(150, 195);
       this.tuesdayBox.Name = "tuesdayBox";
       this.tuesdayBox.Size = new System.Drawing.Size(46, 15);
       this.tuesdayBox.TabIndex = 13;
@@ -252,7 +252,7 @@
       // wednesdayBox
       // 
       this.wednesdayBox.AutoSize = true;
-      this.wednesdayBox.Location = new System.Drawing.Point(200, 165);
+      this.wednesdayBox.Location = new System.Drawing.Point(200, 195);
       this.wednesdayBox.Name = "wednesdayBox";
       this.wednesdayBox.Size = new System.Drawing.Size(50, 15);
       this.wednesdayBox.TabIndex = 14;
@@ -262,7 +262,7 @@
       // saturdayBox
       // 
       this.saturdayBox.AutoSize = true;
-      this.saturdayBox.Location = new System.Drawing.Point(350, 165);
+      this.saturdayBox.Location = new System.Drawing.Point(350, 195);
       this.saturdayBox.Name = "saturdayBox";
       this.saturdayBox.Size = new System.Drawing.Size(39, 15);
       this.saturdayBox.TabIndex = 17;
@@ -272,7 +272,7 @@
       // fridayBox
       // 
       this.fridayBox.AutoSize = true;
-      this.fridayBox.Location = new System.Drawing.Point(300, 165);
+      this.fridayBox.Location = new System.Drawing.Point(300, 195);
       this.fridayBox.Name = "fridayBox";
       this.fridayBox.Size = new System.Drawing.Size(39, 15);
       this.fridayBox.TabIndex = 16;
@@ -283,7 +283,7 @@
       // thursdayBox
       // 
       this.thursdayBox.AutoSize = true;
-      this.thursdayBox.Location = new System.Drawing.Point(250, 165);
+      this.thursdayBox.Location = new System.Drawing.Point(250, 195);
       this.thursdayBox.Name = "thursdayBox";
       this.thursdayBox.Size = new System.Drawing.Size(47, 15);
       this.thursdayBox.TabIndex = 15;
@@ -318,12 +318,25 @@
       this.dayLabel.TabIndex = 19;
       this.dayLabel.Text = "day";
       // 
+      // nameTxtBx
+      // 
+      this.nameTxtBx.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
+      this.nameTxtBx.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+      this.nameTxtBx.ForeColor = System.Drawing.SystemColors.WindowFrame;
+      this.nameTxtBx.Location = new System.Drawing.Point(23, 120);
+      this.nameTxtBx.Name = "nameTxtBx";
+      this.nameTxtBx.Size = new System.Drawing.Size(234, 20);
+      this.nameTxtBx.TabIndex = 20;
+      this.nameTxtBx.Text = "Alarm Name";
+      this.nameTxtBx.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+      // 
       // SetAlarm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(450, 150);
+      this.ClientSize = new System.Drawing.Size(450, 190);
       this.ControlBox = false;
+      this.Controls.Add(this.nameTxtBx);
       this.Controls.Add(this.dayLabel);
       this.Controls.Add(this.dayComBox);
       this.Controls.Add(this.saturdayBox);
@@ -374,5 +387,6 @@
     private System.Windows.Forms.Label dayLabel;
     private MetroFramework.Controls.MetroComboBox dayComBox;
     private System.ComponentModel.BackgroundWorker bgWorker;
+    private System.Windows.Forms.TextBox nameTxtBx;
   }
 }

@@ -5,10 +5,10 @@ using Microsoft.Win32;
 
 namespace SpotiAlarm
 {
-    public partial class settings : MetroFramework.Forms.MetroForm
+    public partial class Settings : MetroFramework.Forms.MetroForm
     {
         public string path = Properties.Settings.Default.UserPath;
-        public settings()
+        public Settings()
         {
             InitializeComponent();
         }
@@ -45,7 +45,7 @@ namespace SpotiAlarm
             #endregion
 
             bool startup = Properties.Settings.Default.UserStartup;
-            if (startup == true)
+            if (startup == true) 
             {
                 onStartupCheck.Checked = true;
             }

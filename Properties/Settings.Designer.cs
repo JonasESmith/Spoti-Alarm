@@ -82,5 +82,17 @@ namespace SpotiAlarm.Properties {
                 this["UserStartup"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string UserAlarms {
+            get {
+                return ((string)(this["UserAlarms"]));
+            }
+            set {
+                this["UserAlarms"] = value;
+            }
+        }
     }
 }
