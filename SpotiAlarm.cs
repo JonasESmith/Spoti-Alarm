@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace SpotiAlarm
 {
@@ -18,6 +19,11 @@ namespace SpotiAlarm
     // hour12 = army/regular  alarm = 0/1
     private int hour12 = 0, alarm = 0;
 
+    // <Summary>
+    // These are necessary for the Selection of the window. This is not super usefull or necessary as of now. 
+    // </Summary>
+    [DllImport("user32")] private static extern bool SetForegroundWindow(IntPtr hwnd);
+    [DllImport("user32.dll")] static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
 
     public int alarmCount;
     public string paths;
@@ -112,15 +118,17 @@ namespace SpotiAlarm
           j = i;
         }
 
+        NextAlarm();
+
         // Loading alarm from settings.
         alarm = 1;
-        getUp.hh = Properties.Settings.Default.UserHour;
-        getUp.mm = Properties.Settings.Default.UserMinute;
+        // getUp.hh = Properties.Settings.Default.UserHour;
+        // getUp.mm = Properties.Settings.Default.UserMinute;
 
         // tool tip for add alarm button/label that shows when the next alarm is. 
         // this is gross but is better than its own label.
-        tooltip = "Next alarm at " + Properties.Settings.Default.UserHour.ToString("D2") + ":"
-                                   + Properties.Settings.Default.UserMinute.ToString("D2");
+        // tooltip = "Next alarm at " + Properties.Settings.Default.UserHour.ToString("D2") + ":"
+        //                            + Properties.Settings.Default.UserMinute.ToString("D2");
       }
       else
       {
@@ -130,6 +138,18 @@ namespace SpotiAlarm
       // set's the tooltip for the digital Clock
       this.toolTip1.SetToolTip(this.addAlarmBtn, tooltip);
       this.toolTip1.SetToolTip(this.label1, tooltip);
+    }
+
+    private void NextAlarm()
+    {
+      string currentTime = DateTime.Now.ToString("h:mm:ss tt");
+
+      for(int i = 1; i <= alarmList.Count; i++)
+      {
+        // one of the alarms is cloeset to current time set it to the next alarm. 
+        // this problem here will be a fun one to solve for sure. 
+        // I added the property Time() to the Alarm library
+      }
     }
     #endregion
 
@@ -208,7 +228,7 @@ namespace SpotiAlarm
           else
           {
             // this brings the window into "Focus"
-            Process.Start(start);
+            SelectWindow(path);
             // this gives enough time for spotify to be brought to the "front" or focus
             System.Threading.Thread.Sleep(2000);
           }
@@ -216,6 +236,18 @@ namespace SpotiAlarm
         }
       }
     }
+
+    private const int SW_SHOWMAXIMIZED = 3;
+    private void SelectWindow(string winApp)
+    {
+      System.Diagnostics.Process[] procs = System.Diagnostics.Process.GetProcessesByName(winApp);
+      foreach (System.Diagnostics.Process proc in procs)
+      {
+        ShowWindow(proc.MainWindowHandle, SW_SHOWMAXIMIZED);
+        SetForegroundWindow(proc.MainWindowHandle);
+      }
+    }
+
     private bool CheckDay()
     {
       bool checkedSum = false;

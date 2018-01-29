@@ -12,10 +12,12 @@ namespace SpotiAlarm
   class Alarm
   {
     string name;
+    string time;
     int    hour;
     int    minute;
     int    second;
     int    days;
+    
 
     public Alarm()
     {
@@ -35,6 +37,14 @@ namespace SpotiAlarm
       second = Second;
       minute = Minute;
 
+    }
+
+    public string Time
+    {
+      get
+      {
+        return (this.hour + ":" + this.minute);
+      }
     }
 
     public int Hour
