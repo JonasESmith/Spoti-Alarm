@@ -24,7 +24,6 @@ namespace SpotiAlarm
     private void Alarm_Load(object sender, EventArgs e)
     {
       #region Loading styles to all assets
-      // Showing Icon
       ShowIcon = false;
 
       // loads "dark" style to match spotify 
@@ -80,17 +79,16 @@ namespace SpotiAlarm
 
       alarm = (Alarm)this.Tag;
 
-      alarm.Name    = nameTxtBx.Text;
+      if (nameTxtBx.Text != "Alarm Name")
+      {
+        alarm.Name = nameTxtBx.Text;
+      }
+      else
+      {
+        alarm.Name = "Basic-Alarm";
+      }
       alarm.Hour    = Convert.ToInt16(HourComBox.GetItemText(this.HourComBox.SelectedItem));
       alarm.Minute  = Convert.ToInt16(minComBox.GetItemText(this.minComBox.SelectedItem));
-
-
-      // Loading into settings for the alarm. 
-      //hh = Convert.ToInt16(HourComBox.GetItemText(this.HourComBox.SelectedItem));
-      //mm = Convert.ToInt16(minComBox.GetItemText(this.minComBox.SelectedItem));
-      //Properties.Settings.Default.UserHour = hh;
-      //Properties.Settings.Default.UserMinute = mm;
-      //Properties.Settings.Default.Save();
 
       // Days to repeat the alarm 
       // this seems Primitive... I can do better
@@ -169,19 +167,6 @@ namespace SpotiAlarm
       alarm.Days = Convert.ToInt32(reCheck);
 
       DialogResult = DialogResult.OK;
-
-
-      // Old way
-      //Properties.Settings.Default.UserDays = reCheck;
-      //Properties.Settings.Default.Save();
-
-      // hides the alarm and makes a new instance of the opening form. 
-      // this works for the best so far. 
-      //this.Hide();
-      //this.DialogResult = DialogResult.OK;
-      //SpotiAlarm ShowAlarm = new SpotiAlarm();
-      //ShowAlarm.Show();
-      //this.Close();
     }
     // on mouse hoover
     private void OnMouseEnterSave(object sender, EventArgs e)
