@@ -11,12 +11,12 @@ namespace SpotiAlarm
 {
   class Alarm
   {
-    string name;
-    string time;
-    int    hour;
-    int    minute;
-    int    second;
-    int    days;
+    string   name;
+    int      hour;
+    int      minute;
+    int      second;
+    int      days;
+    TimeSpan alarmTime;
     
 
     public Alarm()
@@ -31,19 +31,19 @@ namespace SpotiAlarm
     public Alarm(string Name, int Hour, int Minute, int Second, int Days)
     {
 
-      name   = Name;
-      hour   = Hour;
-      days   = Days;
-      second = Second;
-      minute = Minute;
-
+      name      = Name;
+      hour      = Hour;
+      days      = Days;
+      second    = Second;
+      minute    = Minute;
+      alarmTime = new TimeSpan(Hour, Minute,0);
     }
 
-    public string Time
+    public TimeSpan AlarmTime
     {
       get
       {
-        return (this.hour + ":" + this.minute);
+        return (alarmTime);
       }
     }
 

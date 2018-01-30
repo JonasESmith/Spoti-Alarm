@@ -98,6 +98,7 @@ namespace SpotiAlarm
 
     private void LoadAssets()
     {
+      alarm = 1;
       string tooltip = " ";
       string Alarms;
 
@@ -121,7 +122,6 @@ namespace SpotiAlarm
         NextAlarm();
 
         // Loading alarm from settings.
-        alarm = 1;
         // getUp.hh = Properties.Settings.Default.UserHour;
         // getUp.mm = Properties.Settings.Default.UserMinute;
 
@@ -142,13 +142,26 @@ namespace SpotiAlarm
 
     private void NextAlarm()
     {
-      string currentTime = DateTime.Now.ToString("h:mm:ss tt");
+      DateTime currentTime = DateTime.Now;
+      uint currentTimeMs = (uint)currentTime.TimeOfDay.TotalMilliseconds;
 
-      for(int i = 1; i <= alarmList.Count; i++)
+      // num of miliseconds in a day
+      uint msToNextAlarm = 86400000;
+
+      for (int i = 1; i <= alarmList.Count; i++)
       {
-        // one of the alarms is cloeset to current time set it to the next alarm. 
-        // this problem here will be a fun one to solve for sure. 
-        // I added the property Time() to the Alarm library
+        uint totalMs = (uint)alarmList[i - 1].AlarmTime.TotalMilliseconds;
+
+        if (totalMs > currentTimeMs)
+        {
+          if((totalMs - currentTimeMs) < msToNextAlarm)
+          {
+            msToNextAlarm = (totalMs - currentTimeMs);
+
+            getUp.hh = alarmList[i - 1].Hour;
+            getUp.mm = alarmList[i - 1].Minute;
+          }
+        }
       }
     }
     #endregion
@@ -211,6 +224,8 @@ namespace SpotiAlarm
       }
       if ((alarm == 1) && (CheckDay() == true))
       {
+        int Tempint = Convert.ToInt16(DateTime.Now.ToString("HH"));
+
         if (Convert.ToInt16(DateTime.Now.ToString("HH")) == getUp.hh &&
             Convert.ToInt32(DateTime.Now.ToString("mm")) == getUp.mm &&
             Convert.ToInt32(DateTime.Now.ToString("ss")) == getUp.ss)
@@ -222,18 +237,21 @@ namespace SpotiAlarm
           if (proc == null)
           {
             Process.Start(start);
-            // this is to give time for spotify to install/launch
+            // this is to give time for spotify to patch/launch
             System.Threading.Thread.Sleep(15000);
           }
           else
           {
             // this brings the window into "Focus"
-            SelectWindow(path);
-            // this gives enough time for spotify to be brought to the "front" or focus
-            System.Threading.Thread.Sleep(2000);
+            SelectWindow("Spotify");
+            // this gives enough time for spotify to be brought to focus
+            System.Threading.Thread.Sleep(5000);
           }
           SendKeys.Send("{^} {Right}");
         }
+
+        // Loads next alarm into the alarm slot
+        NextAlarm();
       }
     }
 
@@ -324,10 +342,12 @@ namespace SpotiAlarm
 
       if(newAlarm.ShowDialog(null) == DialogResult.OK)
       {
-        alarmList.Add(new Alarm(alarm.Name, alarm.Hour, alarm.Minute, alarm.Minute, alarm.Days));
+        alarmList.Add(new Alarm(alarm.Name, alarm.Hour, alarm.Minute, 0, alarm.Days));
         alarmCount++;
         UpdateUserAlarm();
       }
+
+      NextAlarm();
     }
 
     private void UpdateUserAlarm()
