@@ -33,9 +33,9 @@ namespace SpotiAlarm
     [DllImport("user32")]     private static extern bool SetForegroundWindow(IntPtr hwnd);
     [DllImport("user32.dll")] static extern bool         ShowWindow(IntPtr hWnd, int nCmdShow);
 
-    public int alarmCount;
-    public string paths;
-    public string fileName;
+    public int                 alarmCount;
+    public string              paths;
+    public string              fileName;
     private static List<Alarm> alarmList = new List<Alarm>();
 
     private string path;
@@ -144,54 +144,60 @@ namespace SpotiAlarm
                                                 Convert.ToInt32(words[4 + j]), Convert.ToInt32(words[5 + j])));
           j = i;
         }
-
         NextAlarm();
-
-        // <Summary>
-        //    tool tip for add alarm button/label that shows when the next alarm is. 
-        //    this is gross but is better than its own label.
-        tooltip = "Next alarm at " + getUp.hh.ToString() + ":"
-                                   + getUp.mm;
-        // </Summary>
-
       }
-      else
-      {
-        tooltip = "There is currently no alarm.";
-      }
+    }
 
-      // <Summary>
-      //    set's the tooltip for the digital Clock 
-      // </Summary>
-      this.toolTip1.SetToolTip(this.addAlarmBtn, tooltip);
-      this.toolTip1.SetToolTip(this.label1, tooltip);
+    private void SortAlarm()
+    {
+      alarmList.Sort((x, y) => x.AlarmTime.CompareTo(y.AlarmTime));
+      alarmList.Reverse();
     }
 
     private void NextAlarm()
     {
-      DateTime currentTime = DateTime.Now;
-      uint currentTimeMs = (uint)currentTime.TimeOfDay.TotalMilliseconds;
+      string   tooltip       = "There is currently no alarm.";
+      DateTime currentTime   = DateTime.Now;
+      uint     currentTimeMs = (uint)currentTime.TimeOfDay.TotalMilliseconds;
 
       // <Summary>
       //     num of miliseconds in a day
       // </Summary>
-      uint msToNextAlarm = 86400000;
+      uint     msToNextAlarm = 86400000;
+
+      SortAlarm();
 
       for (int i = 1; i <= alarmList.Count; i++)
       {
-        uint totalMs = (uint)alarmList[i - 1].AlarmTime.TotalMilliseconds;
+        // <Summary>
+        //     Num of miliseconds for the current alarm in AlarmList
+        // </Summary>
+        uint totalAlarmMs = (uint)alarmList[i - 1].AlarmTime.TotalMilliseconds;
 
-        if (totalMs > currentTimeMs)
+
+        if (totalAlarmMs > currentTimeMs)
         {
-          if((totalMs - currentTimeMs) < msToNextAlarm)
+          if((totalAlarmMs - currentTimeMs) < msToNextAlarm)
           {
-            msToNextAlarm = (totalMs - currentTimeMs);
+            msToNextAlarm = (totalAlarmMs - currentTimeMs);
 
             getUp.hh = alarmList[i - 1].Hour;
             getUp.mm = alarmList[i - 1].Minute;
+
+            tooltip = "Next alarm at " + getUp.hh + ":" + getUp.mm;
           }
         }
+        else if (totalAlarmMs < currentTimeMs && msToNextAlarm <= 86400000)
+        {
+          //msToNextAlarm +=
+        }
       }
+
+      // <Summary>
+      //    Sets the tooltip for the digital Clock 
+      // </Summary>
+      this.toolTip1.SetToolTip(this.addAlarmBtn, tooltip);
+      this.toolTip1.SetToolTip(this.label1, tooltip);
     }
     #endregion
 
@@ -298,6 +304,11 @@ namespace SpotiAlarm
         // </Summary>
         NextAlarm();
       }
+
+      if(Convert.ToInt32(DateTime.Now.ToString("mm")) % 30 == 0)
+      {
+        NextAlarm();
+      }
     }
 
     private const int SW_SHOWMAXIMIZED = 3;
@@ -383,20 +394,33 @@ namespace SpotiAlarm
 
     #region Misc.
 
-    private void button2_Click(object sender, EventArgs e)
+    private void AddAlarm()
     {
       SetAlarm newAlarm = new SetAlarm();
-      Alarm    alarm    = new Alarm();
-      newAlarm.Tag      = alarm;
-      newAlarm.Text     = "add Alarm";
+      Alarm alarm = new Alarm();
+      newAlarm.Tag = alarm;
+      newAlarm.Text = "Add Alarm";
 
-      if(newAlarm.ShowDialog(null) == DialogResult.OK)
+      if (newAlarm.ShowDialog(null) == DialogResult.OK)
       {
         alarmList.Add(new Alarm(alarm.Name, alarm.Hour, alarm.Minute, 0, alarm.Days));
         alarmCount++;
         UpdateUserAlarm();
       }
+      NextAlarm();
+    }
 
+    private void EditAlarm()
+    {
+      EditAlarm editAlarm = new EditAlarm();
+      Alarm alarm = new Alarm();
+      editAlarm.Tag = alarmList;
+      editAlarm.Text = "Edit Alarm";
+
+      if (editAlarm.ShowDialog(null) == DialogResult.OK)
+      {
+        UpdateUserAlarm();
+      }
       NextAlarm();
     }
 
@@ -416,8 +440,6 @@ namespace SpotiAlarm
 
       Properties.Settings.Default.UserAlarms = tempUserAlarm;
       Properties.Settings.Default.Save();
-
-      this.toolTip1.SetToolTip(this.label1, tempUserAlarm);
     }
 
     private void label1_Click(object sender, EventArgs e)
@@ -431,6 +453,24 @@ namespace SpotiAlarm
       Settings settingsPage = new Settings();
       settingsPage.Show();
       this.Hide();
+    }
+
+    private void addAlarmBtn_MouseUp(object sender, MouseEventArgs e)
+    {
+      switch (e.Button)
+      {
+        // <Summary>
+        //    Right clicking the alarms button will let users 
+        //      open a dialog for editing button values. 
+        // </Summary>
+        case MouseButtons.Right:
+          EditAlarm();
+          break;
+
+        case MouseButtons.Left:
+          AddAlarm();
+          break;
+      }
     }
 
     protected override void OnFormClosing(FormClosingEventArgs e)

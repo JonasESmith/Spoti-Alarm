@@ -66,11 +66,7 @@
       this.addAlarmBtn.TabIndex = 2;
       this.addAlarmBtn.Text = "add alarm";
       this.addAlarmBtn.UseVisualStyleBackColor = false;
-      this.addAlarmBtn.Click += new System.EventHandler(this.button2_Click);
-      // 
-      // toolTip1
-      // 
-      //this.toolTip1.Popup += new System.Windows.Forms.PopupEventHandler(this.toolTip1_Popup);
+      this.addAlarmBtn.MouseUp += new System.Windows.Forms.MouseEventHandler(this.addAlarmBtn_MouseUp);
       // 
       // msmMain
       // 

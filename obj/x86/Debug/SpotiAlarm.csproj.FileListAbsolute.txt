@@ -94,3 +94,4 @@ C:\Users\smithjon\Desktop\projects\Spoti-Alarm\obj\x86\Debug\SpotiAlarm.csproj.G
 C:\Users\smithjon\Desktop\projects\Spoti-Alarm\obj\x86\Debug\SpotiAlarm.csproj.CoreCompileInputs.cache
 C:\Users\smithjon\Desktop\projects\Spoti-Alarm\obj\x86\Debug\SpotiAlarm.exe
 C:\Users\smithjon\Desktop\projects\Spoti-Alarm\obj\x86\Debug\SpotiAlarm.pdb
+C:\Users\smithjon\Desktop\projects\Spoti-Alarm\obj\x86\Debug\SpotiAlarm.EditAlarm.resources
