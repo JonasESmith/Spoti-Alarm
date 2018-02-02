@@ -1,7 +1,9 @@
-﻿// Programmer :  Jonas Smith
+﻿// <Summary>
+// Programmer :  Jonas Smith
 // program    :  SpotiAlarm
 // Purpose    :  Start spotify to play the last playlist at a specific time. 
 // Set startup:  https://stackoverflow.com/questions/674628/how-do-i-set-a-program-to-launch-at-startup
+// </Summary>
 
 using System;
 using System.Drawing;
@@ -15,22 +17,27 @@ using System.Runtime.InteropServices;
 namespace SpotiAlarm
 {
   public partial class SpotiAlarm : MetroFramework.Forms.MetroForm
-  {   
-    // hour12 = army/regular  alarm = 0/1
+  {
+    // <Summary>
+    //    hour12 = 24/12       
+    //    alarm = 0/1
+    // </Summary>
     private int hour12 = 0, alarm = 0;
 
     // <Summary>
-    // These are necessary for the Selection of the window. This is not super usefull or necessary as of now. 
+    //    These are necessary for the Selection of the window. 
+    //    These function to move the spotify application to the front
+    //    so that the keypress will occur on the application instead
+    //    of any other window that may be selected. 
     // </Summary>
-    [DllImport("user32")] private static extern bool SetForegroundWindow(IntPtr hwnd);
-    [DllImport("user32.dll")] static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+    [DllImport("user32")]     private static extern bool SetForegroundWindow(IntPtr hwnd);
+    [DllImport("user32.dll")] static extern bool         ShowWindow(IntPtr hWnd, int nCmdShow);
 
     public int alarmCount;
     public string paths;
     public string fileName;
     private static List<Alarm> alarmList = new List<Alarm>();
 
-    // path to Spotify.exe
     private string path;
     SetAlarm getUp = new SetAlarm();
 
@@ -39,18 +46,26 @@ namespace SpotiAlarm
       InitializeComponent();
       ShowIcon = false;
 
-      // loads correct theme from MetroFramework.
-      StyleManager = msmMain;
+      // <Summary>
+      //    loads correct theme from MetroFramework.
+      // <Summary>
+      StyleManager  = msmMain;
       msmMain.Theme = MetroFramework.MetroThemeStyle.Dark;
       msmMain.Style = MetroFramework.MetroColorStyle.Green;
 
-      // changes text colors for the dark theme above. 
-      label1.ForeColor = Color.White;
+      // <Summary>
+      //    changes text colors for the dark theme above. 
+      //    Note: label1 is a terrible name... but I made this application my
+      //      very first week of programming one and want to keep it for now
+      //      as a reminder. :)
+      // </Summary>
+      label1.ForeColor      = Color.White;
       addAlarmBtn.ForeColor = Color.White;
 
       #region loadbutton styles 
-
-      // Loading style for the add alarm button.
+      // <Summary>
+      //    Loading style for the add alarm button.
+      // </Summary>
       addAlarmBtn.TabStop = false;
       addAlarmBtn.FlatStyle = FlatStyle.Flat;
       addAlarmBtn.FlatAppearance.BorderSize = 0;
@@ -70,13 +85,20 @@ namespace SpotiAlarm
 
     public void GetExeLocation()
     {
-      // for getting the location of exe file ( it can change when you change the location of exe)
+      // <Summary>
+      //    For getting the location of exe file ( it can change when you change the location of exe)
+      // </Summary>
       paths = System.Reflection.Assembly.GetEntryAssembly().Location;
 
-      // for getting the name of exe file( it can change when you change the name of exe)
+
+      // <Summary>
+      //    For getting the name of exe file( it can change when you change the name of exe)
+      // </Summary>
       fileName = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
 
-      // start the exe autometically when computer is stared.
+      // <Summary>
+      //     start the exe autometically when computer is stared.
+      // </Summary>
       StartExeWhenPcStartup(fileName, paths);
     }
 
@@ -98,6 +120,10 @@ namespace SpotiAlarm
 
     private void LoadAssets()
     {
+      // <Summary>
+      //    alarm = 1; Is used for a conditional check
+      //    to test if the alarm time is coming soon. 
+      // </Summary>
       alarm = 1;
       string tooltip = " ";
       string Alarms;
@@ -121,21 +147,22 @@ namespace SpotiAlarm
 
         NextAlarm();
 
-        // Loading alarm from settings.
-        // getUp.hh = Properties.Settings.Default.UserHour;
-        // getUp.mm = Properties.Settings.Default.UserMinute;
+        // <Summary>
+        //    tool tip for add alarm button/label that shows when the next alarm is. 
+        //    this is gross but is better than its own label.
+        tooltip = "Next alarm at " + getUp.hh.ToString() + ":"
+                                   + getUp.mm;
+        // </Summary>
 
-        // tool tip for add alarm button/label that shows when the next alarm is. 
-        // this is gross but is better than its own label.
-        // tooltip = "Next alarm at " + Properties.Settings.Default.UserHour.ToString("D2") + ":"
-        //                            + Properties.Settings.Default.UserMinute.ToString("D2");
       }
       else
       {
         tooltip = "There is currently no alarm.";
       }
 
-      // set's the tooltip for the digital Clock
+      // <Summary>
+      //    set's the tooltip for the digital Clock 
+      // </Summary>
       this.toolTip1.SetToolTip(this.addAlarmBtn, tooltip);
       this.toolTip1.SetToolTip(this.label1, tooltip);
     }
@@ -145,7 +172,9 @@ namespace SpotiAlarm
       DateTime currentTime = DateTime.Now;
       uint currentTimeMs = (uint)currentTime.TimeOfDay.TotalMilliseconds;
 
-      // num of miliseconds in a day
+      // <Summary>
+      //     num of miliseconds in a day
+      // </Summary>
       uint msToNextAlarm = 86400000;
 
       for (int i = 1; i <= alarmList.Count; i++)
@@ -168,7 +197,10 @@ namespace SpotiAlarm
 
     #region Spotify path check & Load
 
-    // This checks the userpath for Spotify.exe should work if user is hosted on local server.
+    // <Summary>
+    //     This checks the userpath for Spotify.exe should
+    //     work if user is hosted on local server.
+    // </Summary>
     private void LoadPath()
     {
       path = Properties.Settings.Default.UserPath;
@@ -188,14 +220,18 @@ namespace SpotiAlarm
         {
           MessageBox.Show("Please select the Spotify.exe location");
 
-          // this is finding the "usual" path for spotify however it may not always work
+          // <Summary>
+          //     this is finding the "usual" path for spotify however it may not always work
+          // </Summary>
           string userName = Environment.UserName;
           path = "C:\\Users\\" + userName + "\\AppData\\Roaming\\Spotify";
 
 
           using (var fbd = new OpenFileDialog())
           {
-            // open file dialog at the spotify location
+            // <Summary>
+            //     Open file dialog at the spotify location
+            // </Summary>
             fbd.InitialDirectory = path;
             fbd.Filter = "(*.exe)|*.exe;";
             DialogResult result = fbd.ShowDialog();
@@ -237,20 +273,29 @@ namespace SpotiAlarm
           if (proc == null)
           {
             Process.Start(start);
-            // this is to give time for spotify to patch/launch
+            // <Summary>
+            //     this is to give time for spotify to patch/launch
+            // </Summary>
             System.Threading.Thread.Sleep(15000);
           }
           else
           {
-            // this brings the window into "Focus"
+            // <Summary>
+            //     this brings the window into "Focus"
+            // </Summary>
             SelectWindow("Spotify");
-            // this gives enough time for spotify to be brought to focus
+
+            // <Summary>
+            //     this gives enough time for spotify to be brought to focus
+            // </Summary>
             System.Threading.Thread.Sleep(5000);
           }
           SendKeys.Send("{^} {Right}");
         }
 
-        // Loads next alarm into the alarm slot
+        // <Summary>
+        //     Loads next alarm into the alarm slot
+        // </Summary>
         NextAlarm();
       }
     }
@@ -271,7 +316,9 @@ namespace SpotiAlarm
       bool checkedSum = false;
       string day;
 
-      // what day is it?
+      // <Summary>
+      //     what day is it?
+      // </Summary>
       day = DateTime.Now.DayOfWeek.ToString();
       switch (day)
       {
@@ -298,7 +345,9 @@ namespace SpotiAlarm
           break;
       }
 
-      // is that day set to repeat? 
+      // <Summary>
+      //     Is that day set to repeat? 
+      // </Summary>
       if (Properties.Settings.Default.UserDays.Contains(day))
       {
         checkedSum = true;
@@ -307,7 +356,9 @@ namespace SpotiAlarm
       return checkedSum;
     }
 
-    // Timer until the next alarm. 
+    // <Summary>
+    //     Timer until the next alarm. 
+    // </Summary>
     private void UpdateNext()
     {
       double alarmTime = 0;
@@ -322,7 +373,7 @@ namespace SpotiAlarm
     #region Button color changes
     private void OnMouseEnter(object sender, EventArgs e)
     {
-      addAlarmBtn.BackColor = Color.LightGreen; // or Color.Red or whatever you want
+      addAlarmBtn.BackColor = Color.LightGreen;
     }
     private void OnMouseLeave(object sender, EventArgs e)
     {
@@ -338,7 +389,6 @@ namespace SpotiAlarm
       Alarm    alarm    = new Alarm();
       newAlarm.Tag      = alarm;
       newAlarm.Text     = "add Alarm";
-      //this.Hide();
 
       if(newAlarm.ShowDialog(null) == DialogResult.OK)
       {
@@ -364,33 +414,17 @@ namespace SpotiAlarm
                          alarmList[i].Days + comma; i++;
       }
 
-      Properties.Settings.Default.UserDays = tempUserAlarm;
+      Properties.Settings.Default.UserAlarms = tempUserAlarm;
       Properties.Settings.Default.Save();
 
       this.toolTip1.SetToolTip(this.label1, tempUserAlarm);
     }
-
-
-    private void label2_Click(object sender, EventArgs e)
-    { }
 
     private void label1_Click(object sender, EventArgs e)
     {
       if (hour12 == 0) hour12 = 1;
       else hour12 = 0;
     }
-
-    private void label3_Click(object sender, EventArgs e)
-    { }
-
-    private void Form_FormClosed(object sender, FormClosedEventArgs e)
-    { }
-
-    private void nextAlarm_Click(object sender, EventArgs e)
-    { }
-
-    private void toolTip1_Popup(object sender, PopupEventArgs e)
-    { }
 
     private void settingsBtn_Click(object sender, EventArgs e)
     {
