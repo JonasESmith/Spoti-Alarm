@@ -125,7 +125,6 @@ namespace SpotiAlarm
       //    to test if the alarm time is coming soon. 
       // </Summary>
       alarm = 1;
-      string tooltip = " ";
       string Alarms;
 
       if (Properties.Settings.Default.UserAlarms != "0")
@@ -141,7 +140,7 @@ namespace SpotiAlarm
         {
           j *= 5;
           alarmList.Add(new Alarm(words[1 + j], Convert.ToInt32(words[2 + j]), Convert.ToInt32(words[3 + j]),
-                                                Convert.ToInt32(words[4 + j]), Convert.ToInt32(words[5 + j])));
+                                                Convert.ToInt32(words[4 + j]), words[5 + j]));
           j = i;
         }
         NextAlarm();
@@ -421,6 +420,7 @@ namespace SpotiAlarm
       {
         UpdateUserAlarm();
       }
+      UpdateUserAlarm();
       NextAlarm();
     }
 

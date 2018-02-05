@@ -54,7 +54,10 @@ namespace SpotiAlarm
       minComBox.DropDownHeight = HourComBox.Font.Height * 10;
       #endregion
 
+      alarm = (Alarm)this.Tag;
 
+      if(alarm.Name == "0")
+      {
       int hours = Convert.ToInt32(DateTime.Now.ToString("HH"));
       HourComBox.Text = hours.ToString("D2");
       int minutes = Convert.ToInt32(DateTime.Now.ToString("mm")); minutes++;
@@ -62,6 +65,41 @@ namespace SpotiAlarm
         minComBox.Text = "00";
       else
         minComBox.Text = minutes.ToString("D2");
+      }
+      else
+      {
+        this.ControlBox = true;
+        HourComBox.Text = alarm.Hour.ToString("D2");
+        minComBox.Text  = alarm.Minute.ToString("D2");
+        nameTxtBx.Text  = alarm.Name;
+        if(alarm.Days != "1")
+        {
+          repeatingAlarm.Checked = true;
+          String days = Convert.ToString(alarm.Days);
+
+
+          if (days.Contains("0"))
+            sundayBox.Checked = true;
+
+          if (days.Contains("1"))
+            mondayBox.Checked = true;
+
+          if (days.Contains("2"))
+            tuesdayBox.Checked = true;
+
+          if (days.Contains("3"))
+            wednesdayBox.Checked = true;
+
+          if (days.Contains("4"))
+            thursdayBox.Checked = true;
+
+          if (days.Contains("5"))
+            fridayBox.Checked = true;
+
+          if (days.Contains("6"))
+            saturdayBox.Checked = true;
+        }
+      }
     }
 
     #region Save-Button code
@@ -164,11 +202,10 @@ namespace SpotiAlarm
         }
         #endregion
       }
-      alarm.Days = Convert.ToInt32(reCheck);
+      alarm.Days = reCheck;
 
       DialogResult = DialogResult.OK;
     }
-    // on mouse hoover
     private void OnMouseEnterSave(object sender, EventArgs e)
     {
       button1.BackColor = Color.LightGreen;
@@ -247,7 +284,6 @@ namespace SpotiAlarm
         case "Sat":
           reCheck = "6";
           break;
-
       }
       Properties.Settings.Default.UserDays = reCheck;
 

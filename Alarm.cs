@@ -15,20 +15,20 @@ namespace SpotiAlarm
     int      hour;
     int      minute;
     int      second;
-    int      days;
+    string   days;
     TimeSpan alarmTime;
     
 
     public Alarm()
     {
-      name   = "";
+      name   = "0";
       hour   = 0;
-      days   = 0; 
+      days   = "0"; 
       minute = 0;
       second = 0;
     }
 
-    public Alarm(string Name, int Hour, int Minute, int Second, int Days)
+    public Alarm(string Name, int Hour, int Minute, int Second, string Days)
     {
 
       name      = Name;
@@ -83,7 +83,7 @@ namespace SpotiAlarm
       }
     }
 
-    public int Days
+    public string Days
     {
       get
       {
