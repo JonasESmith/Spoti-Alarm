@@ -169,6 +169,8 @@ namespace SpotiAlarm
         else
           reCheck += 9;
 
+
+        alarm.Days = reCheck;
         #endregion
       }
       else
@@ -285,7 +287,7 @@ namespace SpotiAlarm
           reCheck = "6";
           break;
       }
-      Properties.Settings.Default.UserDays = reCheck;
+      alarm.Days = reCheck;
 
     }
     #endregion

@@ -37,9 +37,9 @@ namespace SpotiAlarm
     public string              paths;
     public string              fileName;
     private static List<Alarm> alarmList = new List<Alarm>();
+    private static Alarm       mainAlarm = new Alarm();
 
     private string path;
-    SetAlarm getUp = new SetAlarm();
 
     public SpotiAlarm()
     {
@@ -155,6 +155,7 @@ namespace SpotiAlarm
 
     private void NextAlarm()
     {
+      alarm = 1; 
       string   tooltip       = "There is currently no alarm.";
       DateTime currentTime   = DateTime.Now;
       uint     currentTimeMs = (uint)currentTime.TimeOfDay.TotalMilliseconds;
@@ -180,15 +181,17 @@ namespace SpotiAlarm
           {
             msToNextAlarm = (totalAlarmMs - currentTimeMs);
 
-            getUp.hh = alarmList[i - 1].Hour;
-            getUp.mm = alarmList[i - 1].Minute;
+            mainAlarm.Hour = alarmList[i - 1].Hour;
+            mainAlarm.Minute = alarmList[i - 1].Minute;
+            mainAlarm.Days = alarmList[i - 1].Days;
 
-            tooltip = "Next alarm at " + getUp.hh + ":" + getUp.mm;
+            tooltip = "Next alarm at " + mainAlarm.Hour + ":" + mainAlarm.Minute;
           }
         }
         else if (totalAlarmMs < currentTimeMs && msToNextAlarm <= 86400000)
         {
           //msToNextAlarm +=
+          // I can use this for finding the time until the next alarm. 
         }
       }
 
@@ -265,11 +268,9 @@ namespace SpotiAlarm
       }
       if ((alarm == 1) && (CheckDay() == true))
       {
-        int Tempint = Convert.ToInt16(DateTime.Now.ToString("HH"));
-
-        if (Convert.ToInt16(DateTime.Now.ToString("HH")) == getUp.hh &&
-            Convert.ToInt32(DateTime.Now.ToString("mm")) == getUp.mm &&
-            Convert.ToInt32(DateTime.Now.ToString("ss")) == getUp.ss)
+        if (Convert.ToInt16(DateTime.Now.ToString("HH")) == mainAlarm.Hour &&
+            Convert.ToInt32(DateTime.Now.ToString("mm")) == mainAlarm.Minute &&
+            Convert.ToInt32(DateTime.Now.ToString("ss")) == mainAlarm.Second)
         {
           ProcessStartInfo start = new ProcessStartInfo();
           var proc = Process.GetProcessesByName("Spotify").FirstOrDefault();
@@ -358,11 +359,10 @@ namespace SpotiAlarm
       // <Summary>
       //     Is that day set to repeat? 
       // </Summary>
-      if (Properties.Settings.Default.UserDays.Contains(day))
+      if (mainAlarm.Days.Contains(day))
       {
         checkedSum = true;
       }
-
       return checkedSum;
     }
 
@@ -375,7 +375,7 @@ namespace SpotiAlarm
       string current = DateTime.Now.ToString("HH:mm");
       if (current.Contains(':'))
       { current = current.Replace(":", "."); }
-      alarmTime = Convert.ToDouble(getUp.hh + "." + getUp.mm);
+      alarmTime = Convert.ToDouble(mainAlarm.Hour + "." + mainAlarm.Minute);
       double currentTime = Convert.ToDouble(current);
     }
     #endregion
