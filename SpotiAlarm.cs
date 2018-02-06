@@ -195,7 +195,7 @@ namespace SpotiAlarm
       // <Summary>
       //    Sets the tooltip for the digital Clock 
       // </Summary>
-      this.toolTip1.SetToolTip(this.addAlarmBtn, tooltip);
+      this.toolTip1.SetToolTip(this.addAlarmBtn, "Right click to edit Alarms");
       this.toolTip1.SetToolTip(this.label1, tooltip);
     }
     #endregion
@@ -420,6 +420,8 @@ namespace SpotiAlarm
       {
         UpdateUserAlarm();
       }
+      alarmList = (List<Alarm>)editAlarm.Tag;
+      alarmCount = alarmList.Count;
       UpdateUserAlarm();
       NextAlarm();
     }
