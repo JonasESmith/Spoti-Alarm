@@ -1,6 +1,7 @@
 # Welcome 
 Plays the last selected playlist when the an alarm is triggered.
-# Application windos
+
+# Application screens
 ### HomeScreen
 <p align="left">
   <img src="Pictures/SpotiMain.PNG" alt="icon">
@@ -20,6 +21,7 @@ Plays the last selected playlist when the an alarm is triggered.
 <p align="left">
   <img src="Pictures/SpotiSettings.PNG" alt="icon">
 </p>
+#
 
 # Future Plans
 1. Add background worker to properly update the Homescreen when the alarm is being called.
