@@ -6,7 +6,7 @@ Current Version 1.1
 
 # Preview
 <p align="center">
-  <img src="Pictures/SpotiMain.png" alt="icon">
+  <img src="Pictures/SpotiMain.PNG" alt="icon">
 </p>
 
 <p align="center">
@@ -14,9 +14,9 @@ Current Version 1.1
 </p>
 
 <p align="center">
-  <img src="Pictures/SpotiAlarmEdit.png" alt="icon">
+  <img src="Pictures/SpotiAlarmEdit.PNG" alt="icon">
 </p>
 
 <p align="center">
-  <img src="Pictures/SpotiSettings.png" alt="icon">
+  <img src="Pictures/SpotiSettings.PNG" alt="icon">
 </p>
