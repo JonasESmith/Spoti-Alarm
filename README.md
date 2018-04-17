@@ -1,22 +1,26 @@
 # Welcome 
-SpotiAlarm is An alarm clock that launches Spotify.exe and plays the last song selected.
+Plays the last selected playlist when the alarm is triggered.
 
-# Easy to use
-Current Version 1.1
-
-# Preview
-<p align="center">
+# HomeScreen
+<p align="left">
   <img src="Pictures/SpotiMain.PNG" alt="icon">
 </p>
 
-<p align="center">
+### AddAlarm
+<p align="left">
   <img src="Pictures/SpotiAddAlarm.png" alt="icon">
 </p>
 
-<p align="center">
+### AlarmEdit
+<p align="left">
   <img src="Pictures/SpotiAlarmEdit.PNG" alt="icon">
 </p>
 
-<p align="center">
+### Settings
+<p align="left">
   <img src="Pictures/SpotiSettings.PNG" alt="icon">
 </p>
+
+# Future Plans
+1. Add background worker to properly update the Homescreen when the alarm is being called.
+2. Add the spotify API to better implement usage with playlist selections & controls. 
