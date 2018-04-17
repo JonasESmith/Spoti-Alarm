@@ -1,7 +1,7 @@
 # Welcome 
-Plays the last selected playlist when the alarm is triggered.
-
-# HomeScreen
+Plays the last selected playlist when the an alarm is triggered.
+# Application windos
+### HomeScreen
 <p align="left">
   <img src="Pictures/SpotiMain.PNG" alt="icon">
 </p>
