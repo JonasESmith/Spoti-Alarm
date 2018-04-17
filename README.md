@@ -1,4 +1,4 @@
-# Welcome 
+# Welcome to Spoti-Alarm
 Plays the last selected playlist when the an alarm is triggered.
 
 # Application screens
