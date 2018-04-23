@@ -42,9 +42,9 @@
       // 
       // saveBtn
       // 
-      this.saveBtn.Location = new System.Drawing.Point(107, 132);
+      this.saveBtn.Location = new System.Drawing.Point(352, 52);
       this.saveBtn.Name = "saveBtn";
-      this.saveBtn.Size = new System.Drawing.Size(75, 23);
+      this.saveBtn.Size = new System.Drawing.Size(75, 75);
       this.saveBtn.TabIndex = 0;
       this.saveBtn.Text = "Save";
       this.saveBtn.UseVisualStyleBackColor = true;
@@ -52,9 +52,9 @@
       // 
       // changePathBtn
       // 
-      this.changePathBtn.Location = new System.Drawing.Point(85, 70);
+      this.changePathBtn.Location = new System.Drawing.Point(23, 63);
       this.changePathBtn.Name = "changePathBtn";
-      this.changePathBtn.Size = new System.Drawing.Size(125, 25);
+      this.changePathBtn.Size = new System.Drawing.Size(181, 25);
       this.changePathBtn.TabIndex = 1;
       this.changePathBtn.Text = "change spotify path";
       this.changePathBtn.UseVisualStyleBackColor = true;
@@ -63,7 +63,7 @@
       // onStartupCheck
       // 
       this.onStartupCheck.AutoSize = true;
-      this.onStartupCheck.Location = new System.Drawing.Point(61, 101);
+      this.onStartupCheck.Location = new System.Drawing.Point(23, 94);
       this.onStartupCheck.Name = "onStartupCheck";
       this.onStartupCheck.Size = new System.Drawing.Size(181, 15);
       this.onStartupCheck.TabIndex = 2;
@@ -71,18 +71,18 @@
       this.onStartupCheck.UseVisualStyleBackColor = true;
       this.onStartupCheck.CheckedChanged += new System.EventHandler(this.onStartupCheck_CheckedChanged);
       // 
-      // settings
+      // Settings
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(300, 163);
+      this.ClientSize = new System.Drawing.Size(450, 190);
       this.ControlBox = false;
       this.Controls.Add(this.onStartupCheck);
       this.Controls.Add(this.changePathBtn);
       this.Controls.Add(this.saveBtn);
       this.MaximizeBox = false;
       this.MinimizeBox = false;
-      this.Name = "settings";
+      this.Name = "Settings";
       this.Text = "SpotiAlarm - Settings";
       this.Load += new System.EventHandler(this.settings_Load);
       ((System.ComponentModel.ISupportInitialize)(this.msmMain)).EndInit();

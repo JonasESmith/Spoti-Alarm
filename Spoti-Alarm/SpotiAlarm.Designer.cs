@@ -43,7 +43,7 @@
       // 
       this.label1.BackColor = System.Drawing.Color.Transparent;
       this.label1.Font = new System.Drawing.Font("Calibri", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label1.Location = new System.Drawing.Point(0, 54);
+      this.label1.Location = new System.Drawing.Point(0, 75);
       this.label1.Name = "label1";
       this.label1.Size = new System.Drawing.Size(302, 61);
       this.label1.TabIndex = 0;
@@ -60,7 +60,7 @@
       // 
       this.addAlarmBtn.BackColor = System.Drawing.Color.Transparent;
       this.addAlarmBtn.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.addAlarmBtn.Location = new System.Drawing.Point(360, 42);
+      this.addAlarmBtn.Location = new System.Drawing.Point(360, 70);
       this.addAlarmBtn.Name = "addAlarmBtn";
       this.addAlarmBtn.Size = new System.Drawing.Size(70, 70);
       this.addAlarmBtn.TabIndex = 2;
@@ -77,7 +77,7 @@
       // settingsBtn
       // 
       this.settingsBtn.Image = ((System.Drawing.Image)(resources.GetObject("settingsBtn.Image")));
-      this.settingsBtn.Location = new System.Drawing.Point(0, 113);
+      this.settingsBtn.Location = new System.Drawing.Point(1, 149);
       this.settingsBtn.Name = "settingsBtn";
       this.settingsBtn.Size = new System.Drawing.Size(40, 40);
       this.settingsBtn.TabIndex = 3;
@@ -88,13 +88,13 @@
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(450, 150);
+      this.ClientSize = new System.Drawing.Size(450, 190);
       this.Controls.Add(this.settingsBtn);
       this.Controls.Add(this.addAlarmBtn);
       this.Controls.Add(this.label1);
       this.MaximizeBox = false;
-      this.MaximumSize = new System.Drawing.Size(450, 150);
-      this.MinimumSize = new System.Drawing.Size(400, 150);
+      this.MaximumSize = new System.Drawing.Size(450, 190);
+      this.MinimumSize = new System.Drawing.Size(450, 190);
       this.Name = "SpotiAlarm";
       this.Text = "SpotiAlarm";
       this.Load += new System.EventHandler(this.Form1_Load);

@@ -120,7 +120,7 @@ namespace SpotiAlarm
       else
       {
         Label noAlarms = new Label();
-        noAlarms.Text = "                                        Currently no alarms";
+        noAlarms.Text = " Currently no alarms";
         noAlarms.Size = new Size(350 , 50);
         noAlarms.ForeColor = Color.White;
         noAlarms.Dock = DockStyle.Top;

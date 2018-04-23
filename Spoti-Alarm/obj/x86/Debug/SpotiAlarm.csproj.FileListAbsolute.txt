@@ -121,3 +121,15 @@ C:\Users\smithjon\Desktop\projects\Spoti-Alarm\Spoti-Alarm\obj\x86\Debug\SpotiAl
 C:\Users\smithjon\Desktop\projects\Spoti-Alarm\Spoti-Alarm\obj\x86\Debug\SpotiAlarm.csproj.CoreCompileInputs.cache
 C:\Users\smithjon\Desktop\projects\Spoti-Alarm\Spoti-Alarm\obj\x86\Debug\SpotiAlarm.exe
 C:\Users\smithjon\Desktop\projects\Spoti-Alarm\Spoti-Alarm\obj\x86\Debug\SpotiAlarm.pdb
+C:\Users\Kali\Desktop\Spoti-Alarm\Spoti-Alarm\bin\Debug\SpotiAlarm.exe.config
+C:\Users\Kali\Desktop\Spoti-Alarm\Spoti-Alarm\obj\x86\Debug\SpotiAlarm.exe
+C:\Users\Kali\Desktop\Spoti-Alarm\Spoti-Alarm\obj\x86\Debug\SpotiAlarm.pdb
+C:\Users\Kali\Desktop\Spoti-Alarm\Spoti-Alarm\bin\Debug\SpotiAlarm.exe
+C:\Users\Kali\Desktop\Spoti-Alarm\Spoti-Alarm\bin\Debug\SpotiAlarm.pdb
+C:\Users\Kali\Desktop\Spoti-Alarm\Spoti-Alarm\obj\x86\Debug\SpotiAlarm.csprojResolveAssemblyReference.cache
+C:\Users\Kali\Desktop\Spoti-Alarm\Spoti-Alarm\obj\x86\Debug\SpotiAlarm.EditAlarm.resources
+C:\Users\Kali\Desktop\Spoti-Alarm\Spoti-Alarm\obj\x86\Debug\SpotiAlarm.SetAlarm.resources
+C:\Users\Kali\Desktop\Spoti-Alarm\Spoti-Alarm\obj\x86\Debug\SpotiAlarm.Settings.resources
+C:\Users\Kali\Desktop\Spoti-Alarm\Spoti-Alarm\obj\x86\Debug\SpotiAlarm.SpotiAlarm.resources
+C:\Users\Kali\Desktop\Spoti-Alarm\Spoti-Alarm\obj\x86\Debug\SpotiAlarm.Properties.Resources.resources
+C:\Users\Kali\Desktop\Spoti-Alarm\Spoti-Alarm\obj\x86\Debug\SpotiAlarm.csproj.GenerateResource.Cache
