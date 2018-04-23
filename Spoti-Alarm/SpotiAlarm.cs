@@ -2,53 +2,36 @@
 // Programmer :  Jonas Smith
 // program    :  SpotiAlarm
 // Purpose    :  Start spotify to play the last playlist at a specific time. 
-// Set startup:  https://stackoverflow.com/questions/674628/how-do-i-set-a-program-to-launch-at-startup
 // </Summary>
 
 using System;
-using System.Drawing;
-using System.Windows.Forms;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using SpotifyAPI;
+using System.Linq;
+using System.Drawing;
+using System.Threading;
 using SpotifyAPI.Local;
+using System.Diagnostics;
+using System.Windows.Forms;
 using SpotifyAPI.Local.Enums;
 using SpotifyAPI.Local.Models;
-using System.Threading;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace SpotiAlarm
 {
 
-  public partial class SpotiAlarm : MetroFramework.Forms.MetroForm
+  public partial class SpotiAlarm : Form
   {
-  private SpotifyLocalAPIConfig _config;
-  private SpotifyLocalAPI _spotify;
-
-
-    // <Summary>
-    //    hour12 = 24/12       
-    //    alarm = 0/1
-    // </Summary>
-    private int hour12 = 0, alarm = 0;
-
-    // <Summary>
-    //    These are necessary for the Selection of the window. 
-    //    These function to move the spotify application to the front
-    //    so that the keypress will occur on the application instead
-    //    of any other window that may be selected. 
-    // </Summary>
-    [DllImport("user32")]     private static extern bool SetForegroundWindow(IntPtr hwnd);
-    [DllImport("user32.dll")] static extern bool         ShowWindow(IntPtr hWnd, int nCmdShow);
-
-    public bool                spotifyRunning = false;
-    public int                 alarmCount;
-    public string              paths;
-    public string              fileName;
-    private static List<Alarm> alarmList = new List<Alarm>();
-    private static Alarm       mainAlarm = new Alarm();
+    private SpotifyLocalAPIConfig _config;
+    private SpotifyLocalAPI       _spotify;
+    private int hour12 = 0;
+    public string                 paths;
+    public string                 fileName;
+    public int                    alarmCount;
+    public bool                   spotifyRunning = false;
+    private static List<Alarm>    alarmList      = new List<Alarm>();
+    private static Alarm          mainAlarm      = new Alarm();
 
     private string path;
 
@@ -89,9 +72,16 @@ namespace SpotiAlarm
       /// <summary>
       /// loads correct theme from MetroFramework.
       /// <summary>
-      StyleManager  = msmMain;
+      //StyleManager  = msmMain;
       msmMain.Theme = MetroFramework.MetroThemeStyle.Dark;
       msmMain.Style = MetroFramework.MetroColorStyle.Green;
+
+      /// style changes
+      this.BackColor = Color.FromArgb(17, 17, 17);
+      this.closeBtn.BackColor = Color.FromArgb(45, 45, 45);
+      this.closeBtn.FlatStyle = FlatStyle.Flat;
+      this.closeBtn.FlatAppearance.BorderColor = Color.FromArgb(45, 45, 45);
+
 
       /// <Summary>
       ///    changes text colors for the dark theme above. 
@@ -111,6 +101,14 @@ namespace SpotiAlarm
       addAlarmBtn.FlatAppearance.BorderColor = Color.FromArgb(0, 255, 255, 255);
       addAlarmBtn.MouseEnter += OnMouseEnter;
       addAlarmBtn.MouseLeave += OnMouseLeave;
+
+      editAlarmBtn.ForeColor = Color.White;
+      editAlarmBtn.TabStop = false;
+      editAlarmBtn.FlatStyle = FlatStyle.Flat;
+      editAlarmBtn.FlatAppearance.BorderSize = 0;
+      editAlarmBtn.FlatAppearance.BorderColor = Color.FromArgb(0, 255, 255, 255);
+      editAlarmBtn.MouseEnter += OnMouseEnter;
+      editAlarmBtn.MouseLeave += OnMouseLeave;
 
       settingsBtn.TabStop = false;
       settingsBtn.FlatStyle = FlatStyle.Flat;
@@ -203,11 +201,6 @@ namespace SpotiAlarm
     /// </summary>
     private void LoadAssets()
     {
-      // <Summary>
-      //    alarm = 1; Is used for a conditional check
-      //    to test if the alarm time is coming soon. 
-      // </Summary>
-      alarm = 1;
       string Alarms;
 
       if (Properties.Settings.Default.UserAlarms != "0")
@@ -238,8 +231,7 @@ namespace SpotiAlarm
 
     private void NextAlarm()
     {
-      alarm = 1; 
-      string   tooltip       = "There is currently no alarm.";
+      string   tooltip       = "There are currently no alarm.";
       DateTime currentTime   = DateTime.Now;
       uint     currentTimeMs = (uint)currentTime.TimeOfDay.TotalMilliseconds;
 
@@ -356,9 +348,9 @@ namespace SpotiAlarm
       }
 
       /// <summary>
-      /// If an alarm will be occuring today then check for times. otherwise do not. 
+      /// if an alarm will be occuring today. 
       /// </summary>
-      if ((alarm == 1) && (CheckDay() == true))
+      if (CheckDay())
       {
         currentHour = Convert.ToInt16(DateTime.Now.ToString("HH"));
         currentMint = Convert.ToInt32(DateTime.Now.ToString("mm"));
@@ -449,11 +441,15 @@ namespace SpotiAlarm
     #region Button color changes
     private void OnMouseEnter(object sender, EventArgs e)
     {
-      addAlarmBtn.BackColor = Color.LightGreen;
+      Button button = sender as Button;
+
+      button.BackColor = Color.FromArgb(20, 20, 20);
     }
     private void OnMouseLeave(object sender, EventArgs e)
     {
-      addAlarmBtn.BackColor = Color.FromArgb(0, 255, 255, 255);
+      Button button = sender as Button;
+
+      button.BackColor = Color.FromArgb(0, 255, 255, 255);
     }
     #endregion
 
@@ -562,7 +558,32 @@ namespace SpotiAlarm
       }
     }
 
-    protected override void OnFormClosing(FormClosingEventArgs e)
-    { Application.Exit(); }
+
+    public const int WM_NCLBUTTONDOWN = 0xA1;
+    public const int HT_CAPTION = 0x2;
+
+    [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
+    public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+    [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
+    public static extern bool ReleaseCapture();
+
+    private void SpotiAlarm_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+    {
+      if (e.Button == MouseButtons.Left)
+      {
+        ReleaseCapture();
+        SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+      }
+    }
+
+    private void closeBtn_Click(object sender, EventArgs e)
+    {
+      Application.Exit();
+    }
+
+    private void button1_Click(object sender, EventArgs e)
+    {
+      EditAlarm();
+    }
   }
 }
