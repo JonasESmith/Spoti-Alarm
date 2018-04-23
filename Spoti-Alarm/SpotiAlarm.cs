@@ -13,11 +13,21 @@ using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using SpotifyAPI;
+using SpotifyAPI.Local;
+using SpotifyAPI.Local.Enums;
+using SpotifyAPI.Local.Models;
+using System.Threading;
 
 namespace SpotiAlarm
 {
+
   public partial class SpotiAlarm : MetroFramework.Forms.MetroForm
   {
+  private SpotifyLocalAPIConfig _config;
+  private SpotifyLocalAPI _spotify;
+
+
     // <Summary>
     //    hour12 = 24/12       
     //    alarm = 0/1
@@ -33,6 +43,7 @@ namespace SpotiAlarm
     [DllImport("user32")]     private static extern bool SetForegroundWindow(IntPtr hwnd);
     [DllImport("user32.dll")] static extern bool         ShowWindow(IntPtr hWnd, int nCmdShow);
 
+    public bool                spotifyRunning = false;
     public int                 alarmCount;
     public string              paths;
     public string              fileName;
@@ -41,9 +52,46 @@ namespace SpotiAlarm
 
     private string path;
 
+    public void AuthSpotify()
+    {
+      _config = new SpotifyLocalAPIConfig
+      {
+        ProxyConfig = new ProxyConfig()
+      };
+
+      _spotify = new SpotifyLocalAPI(_config);
+    }
+
+    public void Connect()
+    {
+      if (!SpotifyLocalAPI.IsSpotifyRunning())
+      {
+        spotifyRunning = true;
+        ProcessStartInfo startSpotify = new ProcessStartInfo();
+        path = Properties.Settings.Default.UserPath;
+        startSpotify.FileName = path;
+        Process.Start(startSpotify);
+        return;
+      }
+
+      bool successful = _spotify.Connect();
+      if (successful)
+      {
+        _spotify.ListenForEvents = true;
+      }
+      else
+      {
+        DialogResult res = MessageBox.Show(@"Couldn't connect to the spotify client. Retry?", @"Spotify", MessageBoxButtons.YesNo);
+        if (res == DialogResult.Yes)
+          Connect();
+      }
+    }
+
     public SpotiAlarm()
     {
       InitializeComponent();
+      AuthSpotify();
+
       ShowIcon = false;
 
       // <Summary>
@@ -258,6 +306,10 @@ namespace SpotiAlarm
 
     private void timer1_Tick(object sender, EventArgs e)
     {
+      int currentHr;
+      int currentMn;
+      int currentSc;
+
       if (hour12 == 0)
       {
         label1.Text = DateTime.Now.ToString("hh:mm:ss") + " " + DateTime.Now.ToString("tt");
@@ -268,47 +320,26 @@ namespace SpotiAlarm
       }
       if ((alarm == 1) && (CheckDay() == true))
       {
-        if (Convert.ToInt16(DateTime.Now.ToString("HH")) == mainAlarm.Hour &&
-            Convert.ToInt32(DateTime.Now.ToString("mm")) == mainAlarm.Minute &&
-            Convert.ToInt32(DateTime.Now.ToString("ss")) == mainAlarm.Second)
-        {
-          ProcessStartInfo start = new ProcessStartInfo();
-          var proc = Process.GetProcessesByName("Spotify").FirstOrDefault();
-          path = Properties.Settings.Default.UserPath;
-          start.FileName = path;
-          if (proc == null)
-          {
-            Process.Start(start);
-            // <Summary>
-            //     this is to give time for spotify to patch/launch
-            // </Summary>
-            System.Threading.Thread.Sleep(15000);
-          }
-          else
-          {
-            // <Summary>
-            //     this brings the window into "Focus"
-            // </Summary>
-            SelectWindow("Spotify");
+        currentHr = Convert.ToInt16(DateTime.Now.ToString("HH"));
+        currentMn = Convert.ToInt32(DateTime.Now.ToString("mm"));
+        currentSc = Convert.ToInt32(DateTime.Now.ToString("ss"));
 
-            // <Summary>
-            //     this gives enough time for spotify to be brought to focus
-            // </Summary>
-            System.Threading.Thread.Sleep(5000);
-          }
-          SendKeys.Send("{^} {Right}");
-        }
+        /// This will start the selected song when the alarm is true
+        if (currentHr == mainAlarm.Hour   &&
+            currentMn == mainAlarm.Minute &&
+            currentSc == mainAlarm.Second)
+        { _spotify.Play(); NextAlarm(); }
 
-        // <Summary>
-        //     Loads next alarm into the alarm slot
-        // </Summary>
-        NextAlarm();
+        /// this will start spotify a minute before the alarm goes off
+        else if (currentHr    == mainAlarm.Hour   &&
+                currentMn + 1 == mainAlarm.Minute &&
+                currentSc     == mainAlarm.Second)
+        { Connect(); }
       }
 
-      if(Convert.ToInt32(DateTime.Now.ToString("mm")) % 30 == 0)
-      {
-        NextAlarm();
-      }
+      /// Load's next alarm every 5 minutes
+      if(Convert.ToInt32(DateTime.Now.ToString("mm")) % 5 == 0)
+      {  NextAlarm(); }
     }
 
     private const int SW_SHOWMAXIMIZED = 3;
