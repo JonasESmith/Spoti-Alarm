@@ -35,8 +35,12 @@
       this.alarmFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
       this.titlePanel = new System.Windows.Forms.Panel();
       this.editCloseBtn = new System.Windows.Forms.Button();
+      this.noAlarmPanel = new System.Windows.Forms.Panel();
+      this.noAlarmLabel = new System.Windows.Forms.Label();
       ((System.ComponentModel.ISupportInitialize)(this.msmMain)).BeginInit();
+      this.alarmFlowLayoutPanel.SuspendLayout();
       this.titlePanel.SuspendLayout();
+      this.noAlarmPanel.SuspendLayout();
       this.SuspendLayout();
       // 
       // msmMain
@@ -51,6 +55,7 @@
       // 
       // alarmFlowLayoutPanel
       // 
+      this.alarmFlowLayoutPanel.Controls.Add(this.noAlarmPanel);
       this.alarmFlowLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
       this.alarmFlowLayoutPanel.Location = new System.Drawing.Point(0, 25);
       this.alarmFlowLayoutPanel.Name = "alarmFlowLayoutPanel";
@@ -80,6 +85,24 @@
       this.editCloseBtn.UseVisualStyleBackColor = true;
       this.editCloseBtn.Click += new System.EventHandler(this.editCloseBtn_Click);
       // 
+      // noAlarmPanel
+      // 
+      this.noAlarmPanel.Controls.Add(this.noAlarmLabel);
+      this.noAlarmPanel.Location = new System.Drawing.Point(3, 3);
+      this.noAlarmPanel.Name = "noAlarmPanel";
+      this.noAlarmPanel.Size = new System.Drawing.Size(532, 215);
+      this.noAlarmPanel.TabIndex = 0;
+      // 
+      // noAlarmLabel
+      // 
+      this.noAlarmLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.noAlarmLabel.Location = new System.Drawing.Point(79, 65);
+      this.noAlarmLabel.Name = "noAlarmLabel";
+      this.noAlarmLabel.Size = new System.Drawing.Size(355, 68);
+      this.noAlarmLabel.TabIndex = 0;
+      this.noAlarmLabel.Text = "currently no alarms";
+      this.noAlarmLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+      // 
       // EditAlarm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -97,7 +120,9 @@
       this.Text = "SpotiAlarm / Set";
       this.Load += new System.EventHandler(this.EditAlarm_Load);
       ((System.ComponentModel.ISupportInitialize)(this.msmMain)).EndInit();
+      this.alarmFlowLayoutPanel.ResumeLayout(false);
       this.titlePanel.ResumeLayout(false);
+      this.noAlarmPanel.ResumeLayout(false);
       this.ResumeLayout(false);
 
     }
@@ -109,5 +134,7 @@
     private System.Windows.Forms.FlowLayoutPanel alarmFlowLayoutPanel;
     private System.Windows.Forms.Panel titlePanel;
     private System.Windows.Forms.Button editCloseBtn;
+    private System.Windows.Forms.Panel noAlarmPanel;
+    private System.Windows.Forms.Label noAlarmLabel;
   }
 }
