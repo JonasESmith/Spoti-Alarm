@@ -128,15 +128,19 @@ namespace SpotiAlarm
         noAlarmPanel.BackColor = Color.FromArgb(17, 17, 17);
         noAlarmPanel.Visible = true;
         noAlarmLabel.ForeColor = Color.White;
-        
+        noAlarmPanel.Width = alarmFlowLayoutPanel.Width;
+        noAlarmPanel.Height = alarmFlowLayoutPanel.Height;
+
         Label noAlarmsLabel = new Label();
         noAlarmsLabel.Text = " currently no alarms";
         noAlarmsLabel.Size = new Size(350 , 50);
-        noAlarmsLabel.Font = new Font("Times New Roman", 22);
+        noAlarmsLabel.Font = new Font("Microsoft Sans Serif", 22);
+        noAlarmLabel.TextAlign = ContentAlignment.MiddleCenter;
         noAlarmsLabel.ForeColor = Color.White;
 
         noAlarmPanel.Controls.Add(noAlarmsLabel);
         this.alarmFlowLayoutPanel.Controls.Add(noAlarmPanel);
+        noAlarmLabel.Dock = DockStyle.Fill;
         //noAlarmPanel.Dock = DockStyle.Fill;
       }
     }

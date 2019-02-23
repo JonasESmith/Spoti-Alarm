@@ -146,3 +146,4 @@ C:\Users\Voxel\Desktop\projects\Spoti-Alarm\Spoti-Alarm\obj\x86\Debug\SpotiAlarm
 C:\Users\Voxel\Desktop\projects\Spoti-Alarm\Spoti-Alarm\bin\Debug\SpotiAlarm.exe.config
 C:\Users\Voxel\Desktop\projects\Spoti-Alarm\Spoti-Alarm\bin\Debug\SpotiAlarm.exe
 C:\Users\Voxel\Desktop\projects\Spoti-Alarm\Spoti-Alarm\bin\Debug\SpotiAlarm.pdb
+C:\Users\Voxel\Desktop\projects\Spoti-Alarm\Spoti-Alarm\obj\x86\Debug\SpotiAlarm.AddAlarm.resources

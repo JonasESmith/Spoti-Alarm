@@ -68,6 +68,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddAlarm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddAlarm.Designer.cs">
+      <DependentUpon>AddAlarm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Alarm.cs" />
     <Compile Include="EditAlarm.cs">
       <SubType>Form</SubType>
@@ -95,6 +101,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AddAlarm.resx">
+      <DependentUpon>AddAlarm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EditAlarm.resx">
       <DependentUpon>EditAlarm.cs</DependentUpon>
     </EmbeddedResource>
