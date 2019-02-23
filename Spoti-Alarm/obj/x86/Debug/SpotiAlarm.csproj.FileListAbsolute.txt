@@ -133,3 +133,16 @@ C:\Users\Kali\Desktop\Spoti-Alarm\Spoti-Alarm\obj\x86\Debug\SpotiAlarm.Settings.
 C:\Users\Kali\Desktop\Spoti-Alarm\Spoti-Alarm\obj\x86\Debug\SpotiAlarm.SpotiAlarm.resources
 C:\Users\Kali\Desktop\Spoti-Alarm\Spoti-Alarm\obj\x86\Debug\SpotiAlarm.Properties.Resources.resources
 C:\Users\Kali\Desktop\Spoti-Alarm\Spoti-Alarm\obj\x86\Debug\SpotiAlarm.csproj.GenerateResource.Cache
+C:\Users\Voxel\Desktop\projects\Spoti-Alarm\Spoti-Alarm\obj\x86\Debug\SpotiAlarm.csprojAssemblyReference.cache
+C:\Users\Voxel\Desktop\projects\Spoti-Alarm\Spoti-Alarm\obj\x86\Debug\SpotiAlarm.EditAlarm.resources
+C:\Users\Voxel\Desktop\projects\Spoti-Alarm\Spoti-Alarm\obj\x86\Debug\SpotiAlarm.SetAlarm.resources
+C:\Users\Voxel\Desktop\projects\Spoti-Alarm\Spoti-Alarm\obj\x86\Debug\SpotiAlarm.Settings.resources
+C:\Users\Voxel\Desktop\projects\Spoti-Alarm\Spoti-Alarm\obj\x86\Debug\SpotiAlarm.SpotiAlarm.resources
+C:\Users\Voxel\Desktop\projects\Spoti-Alarm\Spoti-Alarm\obj\x86\Debug\SpotiAlarm.Properties.Resources.resources
+C:\Users\Voxel\Desktop\projects\Spoti-Alarm\Spoti-Alarm\obj\x86\Debug\SpotiAlarm.csproj.GenerateResource.cache
+C:\Users\Voxel\Desktop\projects\Spoti-Alarm\Spoti-Alarm\obj\x86\Debug\SpotiAlarm.csproj.CoreCompileInputs.cache
+C:\Users\Voxel\Desktop\projects\Spoti-Alarm\Spoti-Alarm\obj\x86\Debug\SpotiAlarm.exe
+C:\Users\Voxel\Desktop\projects\Spoti-Alarm\Spoti-Alarm\obj\x86\Debug\SpotiAlarm.pdb
+C:\Users\Voxel\Desktop\projects\Spoti-Alarm\Spoti-Alarm\bin\Debug\SpotiAlarm.exe.config
+C:\Users\Voxel\Desktop\projects\Spoti-Alarm\Spoti-Alarm\bin\Debug\SpotiAlarm.exe
+C:\Users\Voxel\Desktop\projects\Spoti-Alarm\Spoti-Alarm\bin\Debug\SpotiAlarm.pdb

@@ -78,10 +78,10 @@ namespace SpotiAlarm
 
       /// style changes
       this.BackColor = Color.FromArgb(17, 17, 17);
-      this.closeBtn.BackColor = Color.FromArgb(45, 45, 45);
+      this.closeBtn.ForeColor = Color.White;
+      this.closeBtn.BackColor = Color.FromArgb(25, 25, 25);
       this.closeBtn.FlatStyle = FlatStyle.Flat;
-      this.closeBtn.FlatAppearance.BorderColor = Color.FromArgb(45, 45, 45);
-
+      this.closeBtn.FlatAppearance.BorderColor = Color.FromArgb(25, 25, 25);
 
       /// <Summary>
       ///    changes text colors for the dark theme above. 
@@ -273,8 +273,8 @@ namespace SpotiAlarm
       // <Summary>
       //    Sets the tooltip for the digital Clock 
       // </Summary>
-      this.toolTip1.SetToolTip(this.addAlarmBtn, "Right click to edit Alarms");
-      this.toolTip1.SetToolTip(this.timeDisplay, tooltip);
+      //this.toolTip1.SetToolTip(this.addAlarmBtn, "Right click to edit Alarms");
+      //this.toolTip1.SetToolTip(this.timeDisplay, tooltip);
     }
     #endregion
 
