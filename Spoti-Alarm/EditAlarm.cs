@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace SpotiAlarm
 {
-  public partial class EditAlarm : MetroFramework.Forms.MetroForm
+  public partial class EditAlarm : Form
   {
     public int hh;
     public int mm;
@@ -26,14 +26,11 @@ namespace SpotiAlarm
 
     private void EditAlarm_Load(object sender, EventArgs e)
     {
-      // <Summary>
-      //    loads "dark" style to match spotify 
-      // </Summary>
-      #region MetroTheme
-      this.StyleManager = msmMain;
-      msmMain.Theme = MetroFramework.MetroThemeStyle.Dark;
-      msmMain.Style = MetroFramework.MetroColorStyle.Green;
-      #endregion
+      this.BackColor = Color.FromArgb(17, 17, 17);
+      editCloseBtn.ForeColor = Color.White;
+      editCloseBtn.BackColor = Color.FromArgb(25, 25, 25);
+      editCloseBtn.FlatStyle = FlatStyle.Flat;
+      editCloseBtn.FlatAppearance.BorderColor = Color.FromArgb(25, 25, 25);
 
       alarmListTemp = (List<Alarm>)this.Tag;
 
@@ -43,6 +40,11 @@ namespace SpotiAlarm
     private void LoadPanel()
     {
       int firstBtn = 0, secondBtn = 0;
+      int panelWidth = alarmFlowLayoutPanel.Width;
+
+      double titleWidthPerc = (0.65 * panelWidth);
+      double buttonWidthPerc = (0.155 * panelWidth);
+
       this.alarmFlowLayoutPanel.Controls.Clear();
       if (alarmListTemp.Count != 0)
       {
@@ -53,7 +55,7 @@ namespace SpotiAlarm
           alarmComponenet.Font        = new Font("Arial", 8, FontStyle.Bold);
           alarmComponenet.Name        = "button" + i;
           alarmComponenet.Click       += new EventHandler(onClick);
-          alarmComponenet.Width       = 205;
+          alarmComponenet.Width       = Convert.ToInt32(titleWidthPerc);
           alarmComponenet.Height      = 50;
           alarmComponenet.Visible     = true;
           alarmComponenet.TabStop     = false;
@@ -64,14 +66,16 @@ namespace SpotiAlarm
           alarmComponenet.MouseLeave  += new EventHandler(onMouse_Leave);
           alarmComponenet.FlatAppearance.BorderSize = 0;
           alarmComponenet.Show();
-          firstBtn += 265;
+          alarmComponenet.MouseDown += AlarmComponenet_MouseDown;
+          firstBtn += alarmComponenet.Width;
 
           Button editButton = new Button();
           editButton.Text = "Edit";
+          editButton.MouseDown += AlarmComponenet_MouseDown;
           editButton.Name = "edit" + i;
           editButton.Font = new Font("Arial", 8, FontStyle.Bold);
           editButton.Click += new EventHandler(onClick);
-          editButton.Width = 75;
+          editButton.Width = Convert.ToInt32(buttonWidthPerc);
           editButton.Height = 50;
           editButton.TabStop = false;
           editButton.Visible = true;
@@ -82,14 +86,15 @@ namespace SpotiAlarm
           editButton.MouseLeave += new EventHandler(onMouse_Leave);
           editButton.FlatAppearance.BorderSize = 0;
           editButton.Show();
-          secondBtn += 80;
+          secondBtn += editButton.Width;
 
           Button delButton = new Button();
           delButton.Text = "Delete";
           delButton.Name = "del" + i;
+          alarmComponenet.MouseDown += AlarmComponenet_MouseDown;
           delButton.Font = new Font("Arial", 8, FontStyle.Bold); 
           delButton.Click += new EventHandler(onClick);
-          delButton.Width = 60;
+          delButton.Width = Convert.ToInt32(buttonWidthPerc);
           delButton.Height = 50;
           delButton.TabStop = false;
           delButton.Visible = true;
@@ -100,16 +105,16 @@ namespace SpotiAlarm
           delButton.MouseLeave += new EventHandler(onMouse_Leave);
           delButton.FlatAppearance.BorderSize = 0;
           delButton.Show();
-          secondBtn += 80;
+          secondBtn += delButton.Width;
 
           if (i > 1)
           {
-            this.Size = new Size(400, 195 + ((i - 1) * 55));
+            this.Size = new Size(alarmFlowLayoutPanel.Width, 195 + ((i - 1) * 55));
           }
 
-          if(i <= 1)
+          if (i <= 1)
           {
-            this.Size = new Size(400, 195 + ((i - 1) * 55));
+            this.Size = new Size(alarmFlowLayoutPanel.Width, 195 + ((i - 1) * 55));
           }
 
           this.alarmFlowLayoutPanel.Controls.Add(alarmComponenet);
@@ -299,6 +304,52 @@ namespace SpotiAlarm
 
     private void alarmPanel_Paint(object sender, PaintEventArgs e)
     {
+    }
+
+    private void alarmFlowLayoutPanel_Paint(object sender, PaintEventArgs e)
+    {
+
+    }
+
+    private void editCloseBtn_Click(object sender, EventArgs e)
+    {
+      this.Close();
+    }
+
+
+    /// <summary>
+    ///  Basic code for letting user drag the window. 
+    /// </summary>
+    public const int WM_NCLBUTTONDOWN = 0xA1;
+    public const int HT_CAPTION = 0x2;
+
+    [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
+    public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+    [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
+    public static extern bool ReleaseCapture();
+
+    private void alarmFlowLayoutPanel_MouseDown(object sender, MouseEventArgs e)
+    {
+      WindowDraggable(sender, e);
+    }
+
+    private void titlePanel_MouseDown(object sender, MouseEventArgs e)
+    {
+      WindowDraggable(sender, e);
+    }
+
+    public void WindowDraggable(object sender, MouseEventArgs e)
+    {
+      if (e.Button == MouseButtons.Left)
+      {
+        ReleaseCapture();
+        SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+      }
+    }
+
+    private void AlarmComponenet_MouseDown(object sender, MouseEventArgs e)
+    {
+      WindowDraggable(sender, e);
     }
   }
 }
