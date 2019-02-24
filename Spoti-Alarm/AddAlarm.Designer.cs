@@ -35,13 +35,19 @@
       this.hourComboBox = new System.Windows.Forms.ComboBox();
       this.minComboBox = new System.Windows.Forms.ComboBox();
       this.timePickComboBox = new System.Windows.Forms.ComboBox();
+      this.titleBarPanel = new System.Windows.Forms.Panel();
+      this.panel1 = new System.Windows.Forms.Panel();
+      this.splitter1 = new System.Windows.Forms.Splitter();
+      this.comboBox1 = new System.Windows.Forms.ComboBox();
+      this.titleBarPanel.SuspendLayout();
       this.SuspendLayout();
       // 
       // closeBtn
       // 
-      this.closeBtn.Location = new System.Drawing.Point(562, 1);
+      this.closeBtn.Dock = System.Windows.Forms.DockStyle.Right;
+      this.closeBtn.Location = new System.Drawing.Point(421, 0);
       this.closeBtn.Name = "closeBtn";
-      this.closeBtn.Size = new System.Drawing.Size(45, 23);
+      this.closeBtn.Size = new System.Drawing.Size(45, 25);
       this.closeBtn.TabIndex = 0;
       this.closeBtn.Text = "x";
       this.closeBtn.UseVisualStyleBackColor = true;
@@ -120,22 +126,59 @@
       this.timePickComboBox.TabIndex = 7;
       this.timePickComboBox.Text = "am/pm";
       // 
+      // titleBarPanel
+      // 
+      this.titleBarPanel.Controls.Add(this.closeBtn);
+      this.titleBarPanel.Dock = System.Windows.Forms.DockStyle.Top;
+      this.titleBarPanel.Location = new System.Drawing.Point(0, 0);
+      this.titleBarPanel.Name = "titleBarPanel";
+      this.titleBarPanel.Size = new System.Drawing.Size(466, 25);
+      this.titleBarPanel.TabIndex = 8;
+      // 
+      // panel1
+      // 
+      this.panel1.Location = new System.Drawing.Point(38, 156);
+      this.panel1.Name = "panel1";
+      this.panel1.Size = new System.Drawing.Size(373, 130);
+      this.panel1.TabIndex = 9;
+      // 
+      // splitter1
+      // 
+      this.splitter1.Location = new System.Drawing.Point(0, 25);
+      this.splitter1.Name = "splitter1";
+      this.splitter1.Size = new System.Drawing.Size(3, 315);
+      this.splitter1.TabIndex = 10;
+      this.splitter1.TabStop = false;
+      // 
+      // comboBox1
+      // 
+      this.comboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+      this.comboBox1.FormattingEnabled = true;
+      this.comboBox1.Location = new System.Drawing.Point(140, 126);
+      this.comboBox1.Name = "comboBox1";
+      this.comboBox1.Size = new System.Drawing.Size(121, 21);
+      this.comboBox1.TabIndex = 0;
+      // 
       // AddAlarm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.White;
-      this.ClientSize = new System.Drawing.Size(608, 359);
+      this.ClientSize = new System.Drawing.Size(466, 340);
+      this.Controls.Add(this.comboBox1);
+      this.Controls.Add(this.splitter1);
+      this.Controls.Add(this.panel1);
+      this.Controls.Add(this.titleBarPanel);
       this.Controls.Add(this.timePickComboBox);
       this.Controls.Add(this.minComboBox);
       this.Controls.Add(this.hourComboBox);
       this.Controls.Add(this.alarmTimeLabel);
       this.Controls.Add(this.textBox1);
       this.Controls.Add(this.alarmNameLabel);
-      this.Controls.Add(this.closeBtn);
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
       this.Name = "AddAlarm";
       this.Text = "AddAlarm";
+      this.titleBarPanel.ResumeLayout(false);
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -150,5 +193,9 @@
     private System.Windows.Forms.ComboBox hourComboBox;
     private System.Windows.Forms.ComboBox minComboBox;
     private System.Windows.Forms.ComboBox timePickComboBox;
+    private System.Windows.Forms.Panel titleBarPanel;
+    private System.Windows.Forms.Panel panel1;
+    private System.Windows.Forms.Splitter splitter1;
+    private System.Windows.Forms.ComboBox comboBox1;
   }
 }
